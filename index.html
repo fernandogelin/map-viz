@@ -147,10 +147,8 @@ function chart(variable) {
   	var ramp = d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor])
 
     // Load GeoJSON data and merge with states data
-    d3.json("data/topo.json", function(error, topology) {
+    d3.json("data/gdp_joined_town_blkgrp.json", function(error, topology) {
 			if (error) throw error;
-
-			var blockgroup = topology.objects.blockgroups.geometries
 
       // Loop through each state data value in the .csv file
       for (var i = 0; i < data.length; i++) {
@@ -159,12 +157,12 @@ function chart(variable) {
         // Grab data value
         var dataValue = data[i][variable];
         // Find the corresponding state inside the GeoJSON
-        for (var j = 0; j < blockgroup.length; j++) {
-          var jsonState = blockgroup[j].properties.bg_id;
+        for (var j = 0; j < topology.features.length; j++) {
+          var jsonState = topology.features[j].properties.bg_id;
 
           if (dataState == jsonState) {
             // Copy the data value into the JSON
-            blockgroup[j].properties.value = dataValue;
+            topology.features[j].properties.value = dataValue;
             // Stop looking through the JSON
             break;
           }
@@ -176,7 +174,7 @@ function chart(variable) {
 
 			svg.append("g")
       	.selectAll("path")
-        .data(topojson.feature(topology, topology.objects.blockgroups).features)
+        .data(topology.features)
         .enter()
         .append("path")
         .attr("d", path)
@@ -186,6 +184,8 @@ function chart(variable) {
         .style("fill-opacity", "0.8")
         .style("fill", function(d) { return ramp(d.properties.value) })
         .on("mouseover", function(d) {
+					d3.select(".town")
+						.text(d.properties.NAME_right)
           d3.select(".blockgroup")
             .text("Blockgroup: " + d.properties.bg_id)
           d3.select(".variable")
@@ -257,7 +257,6 @@ function chart(variable) {
 }
 
 chart(d3.select("#dropdown").property("value"))
-
 
 function updateMap() {
   d3.selectAll("path").transition().ease(d3.easeCubic).duration(100).style("fill-opacity", "0")
