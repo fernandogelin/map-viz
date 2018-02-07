@@ -1,0 +1,26 @@
+{
+  "name": "d3-project-template",
+  "version": "0.0.1",
+  "description": "Ready to go d3 data visualization project template with grunt",
+  "keywords": [
+    "data visualization",
+    "d3"
+  ],
+  "homepage": "ri360.riipl.org",
+  "author": {
+    "name": "Fernando Gelin",
+    "url": "www.fernandogelin.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "<source repo url>"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "d3": "4.x",
+    "express": "^4.13.3"
+  }
+}
