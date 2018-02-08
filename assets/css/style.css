@@ -1,0 +1,41 @@
+/* Legend Font Style */
+body {
+	font: 11px sans-serif;
+	background-color: #ffffff;
+}
+
+/* Legend Position Style */
+.legend {
+	position:absolute;
+	left:20px;
+	top:30px;
+}
+
+.axis text {
+	font: 10px sans-serif;
+}
+
+.axis line, .axis path {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.dropdown {
+  height: 40px;
+  margin-top: 2rem;
+}
+.dropdown-col {
+  z-index: 200;
+  height: 80%;
+	margin-left: 2rem;
+}
+.map-container {
+  margin-top: 4rem;
+  z-index: -1;
+  background-color: "blue";
+}
+
+body {
+  background-color: "blue";
+}
