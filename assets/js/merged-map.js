@@ -30,15 +30,14 @@ d3.select("#dropdown")
   .attr("value", function(option) { return option.value; })
   .text(function(option) { return option.text; });
 
-
 //Width and height of map
 var width = 600;
 var height = 830;
 
-var colorRange =  _.range(0,1,0.1).map(function(i){return d3.interpolateViridis(i)})
+var colorRange =  _.range(0,1,0.1).map(function(i){return d3.interpolateOrRd(i)})
 
-var lowColor = _.last(colorRange) // '#f9f9f9'
-var highColor = _.first(colorRange) // '#bc2a66'
+var lowColor = _.first(colorRange) // '#f9f9f9'
+var highColor = _.last(colorRange) // '#bc2a66'
 
 // first of two scales for linear fill; ref [1]
 var fill_viridis = d3.scaleLinear()
@@ -73,12 +72,11 @@ var maxVal;
 
 var selected_dataset = "BMI_M";
 
-function colorScale() {
-  var variable = d3.select("#dropdown").property("value")
+function colorScale(selected_dataset) {
   d3.csv("data/data.csv", function(data) {
     var dataArray = [];
     for (var d = 0; d < data.length; d++) {
-      dataArray.push(parseFloat(data[d][variable]))
+      dataArray.push(parseFloat(data[d][selected_dataset]))
     }
     minVal = d3.min(dataArray)
     maxVal = d3.max(dataArray)
@@ -86,7 +84,7 @@ function colorScale() {
 }
 
 function chart(variable) {
-
+    colorScale(variable)
     // Load GeoJSON data and merge with states data
     d3.json("data/merged.json", function(error, topology) {
 			if (error) throw error;
@@ -104,6 +102,9 @@ function chart(variable) {
         .style("fill-opacity", "0.8")
         .call(updateFill, variable)
         .on("mouseover", function(d) {
+          d3.select(this)
+            .style("stroke-width", "3")
+            .style("fill-opacity", "1")
           displayData(d);
         })
         .on("mouseout", function(d) {
@@ -112,55 +113,97 @@ function chart(variable) {
             .style("stroke-width", "0")
             .style("fill-opacity", "0.8")
         })
+      var w = 140, h = 300;
+
+      var key = d3.select("#map")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h)
+        .attr("class", "legend");
+
+      var legend = key.append("defs")
+        .append("svg:linearGradient")
+        .attr("id", "gradient")
+        .attr("x1", "100%")
+        .attr("y1", "0%")
+        .attr("x2", "100%")
+        .attr("y2", "100%")
+        .attr("spreadMethod", "pad");
+
+      legend.append("stop")
+        .attr("offset", "0%")
+        .attr("stop-color", highColor)
+        .attr("stop-opacity", 1);
+
+      legend.append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", lowColor)
+        .attr("stop-opacity", 1);
+
+      key.append("rect")
+        .attr("width", w - 120)
+        .attr("height", h)
+        .style("fill", "url(#gradient)")
+        .attr("transform", "translate(20,10)");
+
+    axisUpdate(variable)
+
     });
 }
 
-function addLegend() {
-  // add a legend
-  colorScale()
-  var w = 140, h = 300;
+function toggle(){
+    var fn = arguments;
+    var l = arguments.length;
+    var i = 0;
+    return function(){
+        if(l <= i) i=0;
+        fn[i++]();
+    }
+}
+function axisUpdate(selected_dataset) {
+    colorScale(selected_dataset)
+    var svg = d3.select(".legend")
+    var yScale = d3.scaleLinear()
+    var yAxisCall = d3.axisRight()
+    var w = 140, h = 300;
 
-  var key = d3.select("#map")
-    .append("svg")
-    .attr("width", w)
-    .attr("height", h)
-    .attr("class", "legend");
+    setScale1()
+    initAxis()
 
-  var legend = key.append("defs")
-    .append("svg:linearGradient")
-    .attr("id", "gradient")
-    .attr("x1", "100%")
-    .attr("y1", "0%")
-    .attr("x2", "100%")
-    .attr("y2", "100%")
-    .attr("spreadMethod", "pad");
+    setInterval(toggle(
+        function(){
+            setScale2()
+            updateAxis()
+        },
+        function(){
+            setScale1()
+            updateAxis()
+        }), 2000)
 
-  legend.append("stop")
-    .attr("offset", "0%")
-    .attr("stop-color", highColor)
-    .attr("stop-opacity", 1);
+    function setScale1(){
+        yScale.domain([minVal, maxVal]).range([h, 0])
+        yAxisCall.scale(yScale)
+    }
 
-  legend.append("stop")
-    .attr("offset", "100%")
-    .attr("stop-color", lowColor)
-    .attr("stop-opacity", 1);
+    function setScale2(){
+        yScale.domain([minVal, maxVal]).range([h, 0])
+        yAxisCall.scale(yScale)
+    }
 
-  key.append("rect")
-    .attr("width", w - 120)
-    .attr("height", h)
-    .style("fill", "url(#gradient)")
-    .attr("transform", "translate(20,10)");
+    function initAxis() {
+        svg.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(41,10)")
+            .call(yAxisCall)
+    }
 
-  var y = d3.scaleLinear()
-    .range([h, 0])
-    .domain([minVal, maxVal]);
-
-  var yAxis = d3.axisRight(y);
-
-  key.append("g")
-    .attr("class", "y axis")
-    .attr("transform", "translate(41,10)")
-    .call(yAxis)
+    function updateAxis(){
+        var t = d3.transition()
+            .duration(100)
+        svg.select(".y")
+            .transition(t)
+            .call(yAxisCall)
+    }
 }
 
 function updateFill(selection, selected_dataset) {
@@ -193,17 +236,15 @@ function displayData(d) {
     .text(selectedVar.options[selectedVar.selectedIndex].text)
   d3.select(".value")
     .text(parseFloat(d.properties[selected_dataset]));
-  d3.select(this)
-    .style("stroke-width", "3")
-    .style("fill-opacity", "1")
 }
 
 var dropDown = d3.select("#dropdown");
 
 dropDown.on("change", function() {
-  d3.selectAll("g").remove()
-  selected_dataset = d3.event.target.value;
+  d3.select(".y.axis").remove()
+  selected_dataset = d3.select("#dropdown").property("value");
   map.call(updateFill, selected_dataset)
+  axisUpdate(selected_dataset)
 });
 
 chart(d3.select("#dropdown").property("value"))
