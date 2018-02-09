@@ -32,7 +32,7 @@ d3.select("#dropdown")
 
 //Width and height of map
 var width = 600,
-    height = 800,
+    height = 830,
     centered;
 
 var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolateYlOrRd(i)})
@@ -51,8 +51,8 @@ var norm_fill = d3.scaleLinear()
 
 // D3 Projection
 var projection = d3.geoMercator()
-      .scale([40000])
-      .translate([50250, 32390])
+      .scale([39700])
+      .translate([49850, 32150])
 
     // for geoAlbersUsa
     //.scale([33000])
@@ -82,6 +82,7 @@ var maxVal;
 
 var selected_dataset = "BMI_M";
 
+// Function to calculate color scale and min, max values based on csv data
 function colorScale(selected_dataset) {
   d3.csv("data/data.csv", function(data) {
     var dataArray = [];
@@ -118,9 +119,10 @@ function chart(variable) {
             .style("stroke-width", "3")
             .style("fill-opacity", "1")
           displayData(d);
+          plotAge(d);
+          plotRace(d);
         })
         .on("mouseout", function(d) {
-          d3.select("#tooltip").remove()
           d3.select(this)
             .style("stroke-width", "0.3")
             .style("fill-opacity", "0.8")
@@ -155,7 +157,7 @@ function chart(variable) {
 
       key.append("rect")
         .attr("width", w - 120)
-        .attr("height", h + 20)
+        .attr("height", h + 40)
         .style("fill", "url(#gradient)")
         .attr("transform", "translate(20,10)");
 
@@ -173,6 +175,7 @@ function toggle(){
         fn[i++]();
     }
 }
+// Function to update and transition axis
 function axisUpdate(selected_dataset) {
     colorScale(selected_dataset)
     var svg = d3.select(".legend")
@@ -191,7 +194,7 @@ function axisUpdate(selected_dataset) {
         function(){
             setScale1()
             updateAxis()
-        }), 2000)
+        }), 1000)
 
     function setScale1(){
         yScale.domain([minVal, maxVal]).range([h, 0])
@@ -212,13 +215,14 @@ function axisUpdate(selected_dataset) {
 
     function updateAxis(){
         var t = d3.transition()
-            .duration(100)
+            .duration(200)
         svg.select(".y")
             .transition(t)
             .call(yAxisCall)
     }
 }
 
+// Functions to update and transition path fill
 function updateFill(selection, selected_dataset) {
     var d_extent = d3.extent(selection.data(), function(d) {
         return parseFloat(d.properties[selected_dataset]);
@@ -238,6 +242,88 @@ function rescaleFill(selection, d_extent) {
   });
 }
 
+// function to plot demographics
+var bars = d3.select(".age-plot")
+             .append("svg")
+             .attr("width", 400)
+             .attr("height", 400)
+             .append("g")
+
+
+var ageBins = ["Xunder_5_years", "X10_to_14_years", "X15_to_17_years",
+               "X18_to_21_years", "X22_to_24_years", "X25_to_29_years",
+               "X30_to_34_years", "X35_to_39_years", "X40_to_44_years",
+               "X45_to_49_years", "X50_to_54_years", "X55_to_59_years",
+               "X5_to_9_years", "X60_and_61_years", "X62_to_64_years",
+               "X65_and_66_years", "X67_to_69_years", "X70_to_74_years",
+               "X75_to_79_years", "X80_to_84_years", "X85_years_and_over"];
+
+function plotAge(d) {
+  ageBins.forEach(function(element) {
+    var width = parseFloat(d.properties[element]) * 10
+    var i = ageBins.indexOf(element)
+    bars.append("rect")
+      .attr("class", element)
+      .attr("height", 10)
+      .attr("width", 0)
+      .attr("transform", "translate(15," + i*12 + ")")
+      .attr("fill", "blue")
+
+    var elemClass = "." + element
+    d3.select(elemClass)
+      .transition().attrTween("width", function() {
+        return d3.interpolateRound(this.getAttribute("width"), width)
+      });
+  })
+}
+
+var dWidth = 160,
+    dHeight = 160,
+    radius = Math.min(dWidth, dHeight) / 2;
+
+var donutColor = d3.scaleOrdinal(d3.schemeCategory20c);
+
+var donutWidth = 30;
+
+var arc = d3.arc()
+  .innerRadius(radius - donutWidth)
+  .outerRadius(radius);
+
+var pie = d3.pie()
+  .value(function(d) { return d.value; })
+  .sort(null);
+
+var svg = d3.select('.race-plot')
+  .append('svg')
+  .attr('width', dWidth)
+  .attr('height', dHeight)
+  .append('g')
+  .attr('transform', 'translate(' + (dWidth / 2) +
+    ',' + (dHeight / 2) + ')');
+
+function plotRace(d) {
+  var races = ["american indian and alaska native ", "black or african american ",
+               "native hawaiian and other pacific islander ", "some other race ",
+               "white "]
+  var dataset = []
+  var dataPoint = {}
+  for (var i = 0; i < races.length; i++) {
+    var race = races[i];
+    dataPoint.race = race
+    dataPoint.value = d.properties[race]
+  }
+  dataset.push(dataPoint)
+
+  var g = svg.selectAll(".arc")
+      .data(pie(dataset))
+    .enter().append("g")
+      .attr("class", "arc");
+
+  g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return donutColor(d.value); });
+}
+// function to display data on the side
 function displayData(d) {
   var selectedVar = document.getElementById("dropdown")
 
@@ -251,6 +337,7 @@ function displayData(d) {
     .text(parseFloat(d.properties[selected_dataset]));
 }
 
+// functions to zoom on block group path
 function clicked(d) {
   var x, y, k;
 
@@ -276,6 +363,7 @@ function clicked(d) {
       .style("stroke-width", 1.5 / k + "px");
 }
 
+// Dropdown change updates
 var dropDown = d3.select("#dropdown");
 
 dropDown.on("change", function() {
@@ -285,4 +373,5 @@ dropDown.on("change", function() {
   axisUpdate(selected_dataset)
 });
 
+// plot init
 chart(d3.select("#dropdown").property("value"))
