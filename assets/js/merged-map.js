@@ -31,10 +31,11 @@ d3.select("#dropdown")
   .text(function(option) { return option.text; });
 
 //Width and height of map
-var width = 600;
-var height = 830;
+var width = 600,
+    height = 800,
+    centered;
 
-var colorRange =  _.range(0,1,0.1).map(function(i){return d3.interpolateOrRd(i)})
+var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolateYlOrRd(i)})
 
 var lowColor = _.first(colorRange) // '#f9f9f9'
 var highColor = _.last(colorRange) // '#bc2a66'
@@ -67,6 +68,15 @@ var svg = d3.select("#map")
   .attr("width", width)
   .attr("height", height);
 
+svg.append("rect")
+    .attr("class", "background")
+    .style("fill", "#fff")
+    .attr("width", width)
+    .attr("height", height)
+    .on("click", clicked);
+
+var g = svg.append("g");
+
 var minVal;
 var maxVal;
 
@@ -92,13 +102,15 @@ function chart(variable) {
       // Bind the data to the SVG and create one path per GeoJSON feature
       var selectedVar = document.getElementById("dropdown")
 
-      map = svg.selectAll("path")
+      map = g.append("g")
+        .attr("id", "blkgrp")
+        .selectAll("path")
         .data(topology.features)
         .enter()
         .append("path")
         .attr("d", path)
-        .style("stroke", "#FFF")
-        .style("stroke-width", "0")
+        .style("stroke", "#c8c8c8")
+        .style("stroke-width", "0.3")
         .style("fill-opacity", "0.8")
         .call(updateFill, variable)
         .on("mouseover", function(d) {
@@ -110,9 +122,10 @@ function chart(variable) {
         .on("mouseout", function(d) {
           d3.select("#tooltip").remove()
           d3.select(this)
-            .style("stroke-width", "0")
+            .style("stroke-width", "0.3")
             .style("fill-opacity", "0.8")
         })
+        .on("click", clicked)
       var w = 140, h = 300;
 
       var key = d3.select("#map")
@@ -142,7 +155,7 @@ function chart(variable) {
 
       key.append("rect")
         .attr("width", w - 120)
-        .attr("height", h)
+        .attr("height", h + 20)
         .style("fill", "url(#gradient)")
         .attr("transform", "translate(20,10)");
 
@@ -236,6 +249,31 @@ function displayData(d) {
     .text(selectedVar.options[selectedVar.selectedIndex].text)
   d3.select(".value")
     .text(parseFloat(d.properties[selected_dataset]));
+}
+
+function clicked(d) {
+  var x, y, k;
+
+  if (d && centered !== d) {
+    var centroid = path.centroid(d);
+    x = centroid[0];
+    y = centroid[1];
+    k = 4;
+    centered = d;
+  } else {
+    x = width / 2;
+    y = height / 2;
+    k = 1;
+    centered = null;
+  }
+
+  g.selectAll("path")
+      .classed("active", centered && function(d) { return d === centered; });
+
+  g.transition()
+      .duration(750)
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+      .style("stroke-width", 1.5 / k + "px");
 }
 
 var dropDown = d3.select("#dropdown");
