@@ -103,6 +103,11 @@ function chart(variable) {
       // Bind the data to the SVG and create one path per GeoJSON feature
       var selectedVar = document.getElementById("dropdown")
 
+      // var bbox = path.bounds(topology)
+      // var s = .95 / Math.max((bbox[1][0] - bbox[0][0]) / width, (bbox[1][1] - bbox[0][1]) / height);
+      // var t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+      // console.log(t)
+      // projection.scale(s).translate(t)
       map = g.append("g")
         .attr("id", "blkgrp")
         .selectAll("path")
@@ -120,7 +125,9 @@ function chart(variable) {
             .style("fill-opacity", "1")
           displayData(d);
           plotAge(d);
+          plotAgeRI();
           plotRace(d);
+          plotRaceRI();
         })
         .on("mouseout", function(d) {
           d3.select(this)
@@ -260,7 +267,7 @@ var ageBins = ["Xunder_5_years", "X10_to_14_years", "X15_to_17_years",
 
 function plotAge(d) {
   ageBins.forEach(function(element) {
-    var width = parseFloat(d.properties[element]) * 10
+    var width = parseFloat(d.properties[element]) * 2.5
     var i = ageBins.indexOf(element)
     bars.append("rect")
       .attr("class", element)
@@ -277,52 +284,86 @@ function plotAge(d) {
   })
 }
 
-var dWidth = 160,
-    dHeight = 160,
-    radius = Math.min(dWidth, dHeight) / 2;
+function plotAgeRI() {
+  d3.json("data/ri_age.json", function(error, data) {
+    if (error) throw error;
 
-var donutColor = d3.scaleOrdinal(d3.schemeCategory20c);
+    bars.selectAll("line").data(data).enter()
+      .append("line")
+      .attr("x1", function(d) { return parseFloat(d.value); })
+      .attr("y1", function(d, i) { return i; })
+      .attr("x2", function(d) { return parseFloat(d.value); })
+      .attr("y2", function(d, i) { return i+10; })
+      .attr("transform", function(d, i) {
+        return "translate(15," + i*11 + ")";
+      })
+      .style("stroke-width", 2)
+      .style("stroke", "black")
+  });
+}
 
-var donutWidth = 30;
+// Race plot
+var rWidth = 300,
+    rHeight = 400;
 
-var arc = d3.arc()
-  .innerRadius(radius - donutWidth)
-  .outerRadius(radius);
-
-var pie = d3.pie()
-  .value(function(d) { return d.value; })
-  .sort(null);
-
-var svg = d3.select('.race-plot')
+var raceBar = d3.select('.race-plot')
   .append('svg')
-  .attr('width', dWidth)
-  .attr('height', dHeight)
+  .attr('width', rWidth)
+  .attr('height', rHeight)
+  .attr('class', 'race-svg')
   .append('g')
-  .attr('transform', 'translate(' + (dWidth / 2) +
-    ',' + (dHeight / 2) + ')');
+  .attr('transform', 'translate(0,10)');
+
+var rColor = d3.schemeDark2;
+
+var races = ["american indian and alaska native ", "asian ", "black or african american ",
+             "native hawaiian and other pacific islander ", "some other race ", "white "];
+
+var classes = ["native-american", "black", "asian", "pacific", "other", "white"];
+
+raceBar.selectAll(".race-section").data(classes).enter()
+    .append("rect")
+    .attr("class", "race-section")
+    .attr("class", function(d) {return d})
 
 function plotRace(d) {
-  var races = ["american indian and alaska native ", "black or african american ",
-               "native hawaiian and other pacific islander ", "some other race ",
-               "white "]
-  var dataset = []
-  var dataPoint = {}
-  for (var i = 0; i < races.length; i++) {
-    var race = races[i];
-    dataPoint.race = race
-    dataPoint.value = d.properties[race]
-  }
-  dataset.push(dataPoint)
+  races.forEach(function(element) {
+    var width = parseFloat(d.properties[element]) * 2
+    var i = races.indexOf(element)
 
-  var g = svg.selectAll(".arc")
-      .data(pie(dataset))
-    .enter().append("g")
-      .attr("class", "arc");
-
-  g.append("path")
-      .attr("d", arc)
-      .style("fill", function(d) { return donutColor(d.value); });
+    var raceClass = "." + classes[i]
+    d3.select(raceClass)
+      .attr("transform", "translate(10," + i*25 + ")")
+      .attr("fill", rColor[i])
+      .attr("height", 20)
+      .transition().attrTween("width", function() {
+        return d3.interpolateRound(this.getAttribute("width"), width)
+      });
+    });
 }
+
+var raceAll = d3.select(".race-svg").append("g")
+                .attr('transform', 'translate(0,10)');
+
+function plotRaceRI() {
+  d3.json("data/ri_race.json", function(error, data) {
+    if (error) throw error;
+
+    raceAll.selectAll("line").data(data).enter()
+      .append("line")
+      .attr("x1", function(d) { return parseFloat(d.value); })
+      .attr("y1", function(d, i) { return i-2; })
+      .attr("x2", function(d) { return parseFloat(d.value); })
+      .attr("y2", function(d, i) { return i+22; })
+      .attr("transform", function(d, i) {
+        return "translate(10," + i*24 + ")";
+      })
+      .style("stroke-width", 3)
+      .style("stroke", "black")
+  });
+}
+
+
 // function to display data on the side
 function displayData(d) {
   var selectedVar = document.getElementById("dropdown")

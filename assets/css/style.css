@@ -35,7 +35,9 @@ body {
   z-index: -1;
   background-color: "blue";
 }
-
+.race-plot {
+	margin-left: 2rem;
+}
 body {
   background-color: "blue";
 }
