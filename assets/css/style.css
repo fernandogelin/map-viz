@@ -1,4 +1,6 @@
 /* Legend Font Style */
+@import url("https://use.typekit.net/xzf6qrz.css");
+
 body {
 	font: 11px sans-serif;
 	background-color: #ffffff;
@@ -25,19 +27,44 @@ body {
   height: 40px;
   margin-top: 2rem;
 }
-.dropdown-col {
+.dropdown .left {
+	margin-left: 10rem;
+}
+.center-col {
   z-index: 200;
   height: 80%;
-	margin-left: 2rem;
+	padding: 1.5rem;
 }
 .map-container {
   margin-top: 4rem;
+	margin-left: 2rem;
   z-index: -1;
   background-color: "blue";
 }
+#map-right {
+	margin-left: 0rem;
+}
 .race-plot {
 	margin-left: 2rem;
+	padding-top: 8%;
 }
-body {
-  background-color: "blue";
+.stats-table {
+	font-family: "brother-1816",sans-serif;
+	font-weight: bold;
+}
+
+.town-heading {
+	min-height: 20vh;
+	padding-left: 2rem;
+	margin-left: 2.2rem;
+}
+.current-value {
+	text-align: center;
+}
+.demographics-plots {
+	margin-top: 2rem;
+	margin-left: 4rem;
+}
+text {
+	font-family: "ardoise-std",sans-serif;
 }

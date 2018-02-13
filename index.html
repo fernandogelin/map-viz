@@ -13,25 +13,46 @@
 
 </head>
 <body>
+	<div class="row dropdown">
+		<div class="col-md-4">
+			<select id="dropdown" class="dropdown left btn btn-outline-primary"></select>
+		</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<select id="dropdown-right" class="dropdown right btn btn-outline-primary"></select>
+		</div>
+	</div>
 	<div class="row map-container d-flex justify-content-center">
-	  <div id="map" class="col-md-4"></div>
-	  <div class="col-md-4 dropdown-col">
-	    <select id="dropdown" class="dropdown btn btn-warning"></select>
+	  <div id="map" class="col-md-4">
+		</div>
+	  <div class="col-md-4 center-col">
 	    <div class="stats-table">
-	      <h3 class="blockgroup"></h3>
-				<p class="town"></p>
-	      <div class="row current-value">
-		      <p class="variable col-md-4"></p>
-		      <p class="value col-md-6"></p>
-	    	</div>
-				<div class="row">
-				<div class="age-plot col-md-4">
-				</div>
-				<div class="race-plot col-md-6">
-				</div>
+				<div class="town-heading">
+				<h2 class="row town"></h2>
+	      <h4 class="row blockgroup"></h4>
 			</div>
+	      <div class="row d-flex justify-content-center">
+					<div class="current-value left col-md-6">
+			      <p class="variable left"></p>
+			      <h1 class="value left"></h1>
+					</div>
+					<div class="current-value right col-md-6">
+						<p class="variable right"></p>
+						<h1 class="value right"></h1>
+					</div>
+	    	</div>
+				<div class="demographics">
+					<div class="row demographics-plots">
+						<div class="age-plot col-md-4">
+						</div>
+						<div class="race-plot col-md-6">
+						</div>
+					</div>
+				</div>
 	    </div>
 	  </div>
+		<div id="map-right" class="col-md-4"></div>
 	</div>
 </body>
 

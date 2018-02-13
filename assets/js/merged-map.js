@@ -21,21 +21,25 @@ var dropdown_options = [
 ]
 
 // Populate dropdown
-d3.select("#dropdown")
-  .selectAll("option")
-  .data(dropdown_options)
-  .enter()
-  .append("option")
-  .attr("id", function(option) { return option.value; })
-  .attr("value", function(option) { return option.value; })
-  .text(function(option) { return option.text; });
+function populateDropdown(drodownId) {
+  d3.select("#" + drodownId)
+    .selectAll("option")
+    .data(dropdown_options)
+    .enter()
+    .append("option")
+    .attr("id", function(option) { return option.value; })
+    .attr("value", function(option) { return option.value; })
+    .text(function(option) { return option.text; });
+}
+populateDropdown("dropdown");
+populateDropdown("dropdown-right");
 
 //Width and height of map
 var width = 600,
-    height = 830,
+    height = 692,
     centered;
 
-var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolateYlOrRd(i)})
+var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolateBlues(i)})
 
 var lowColor = _.first(colorRange) // '#f9f9f9'
 var highColor = _.last(colorRange) // '#bc2a66'
@@ -51,31 +55,31 @@ var norm_fill = d3.scaleLinear()
 
 // D3 Projection
 var projection = d3.geoMercator()
-      .scale([39700])
-      .translate([49850, 32150])
-
-    // for geoAlbersUsa
-    //.scale([33000])
-    //.translate([-10000, 3300]);
+      .scale([32700])
+      .translate([41150, 26500])
 
 // Define path generator
 var path = d3.geoPath() // path generator that will convert GeoJSON to SVG paths
   .projection(projection); // tell path generator to use albersUsa projection
 
 //Create SVG element and append map to the SVG
-var svg = d3.select("#map")
-  .append("svg")
-  .attr("width", width)
-  .attr("height", height);
 
-svg.append("rect")
-    .attr("class", "background")
-    .style("fill", "#fff")
+function initMap(divId) {
+  var svg = d3.select("#" + divId)
+    .append("svg")
     .attr("width", width)
-    .attr("height", height)
-    .on("click", clicked);
+    .attr("height", height);
 
-var g = svg.append("g");
+  svg.append("rect")
+      .attr("class", "background")
+      .style("fill", "#fff")
+      .attr("width", width)
+      .attr("height", height)
+      .on("click", clicked);
+
+  var g = svg.append("g");
+  return g;
+}
 
 var minVal;
 var maxVal;
@@ -94,33 +98,39 @@ function colorScale(selected_dataset) {
   });
 }
 
-function chart(variable) {
+function chart(variable, dropdown, divId) {
     colorScale(variable)
     // Load GeoJSON data and merge with states data
     d3.json("data/merged.json", function(error, topology) {
 			if (error) throw error;
+      g = initMap(divId)
 
       // Bind the data to the SVG and create one path per GeoJSON feature
-      var selectedVar = document.getElementById("dropdown")
+      var selectedVar = document.getElementById(dropdown)
 
-      // var bbox = path.bounds(topology)
+      // var bbox = path.bounds(topology.features[0])
       // var s = .95 / Math.max((bbox[1][0] - bbox[0][0]) / width, (bbox[1][1] - bbox[0][1]) / height);
       // var t = [(width - s * (bbox[1][0] + bbox[0][0])) / 2, (height - s * (bbox[1][1] + bbox[0][1])) / 2];
+
       // console.log(t)
       // projection.scale(s).translate(t)
-      map = g.append("g")
+      g.append("g")
         .attr("id", "blkgrp")
         .selectAll("path")
         .data(topology.features)
         .enter()
         .append("path")
+        .attr("class", function(d) {
+          return divId + " b" + d.properties.bg_id;
+        })
         .attr("d", path)
         .style("stroke", "#c8c8c8")
         .style("stroke-width", "0.3")
         .style("fill-opacity", "0.8")
         .call(updateFill, variable)
         .on("mouseover", function(d) {
-          d3.select(this)
+          var c = "." + this.getAttribute("class").split(" ")[1];
+          d3.selectAll(c)
             .style("stroke-width", "3")
             .style("fill-opacity", "1")
           displayData(d);
@@ -130,18 +140,22 @@ function chart(variable) {
           plotRaceRI();
         })
         .on("mouseout", function(d) {
-          d3.select(this)
+          var c = "." + this.getAttribute("class").split(" ")[1];
+          d3.selectAll(c)
             .style("stroke-width", "0.3")
             .style("fill-opacity", "0.8")
         })
         .on("click", clicked)
+
       var w = 140, h = 300;
 
-      var key = d3.select("#map")
+      var legendClass = "legend " + divId + "legend";
+
+      var key = d3.select("#" + divId)
         .append("svg")
         .attr("width", w)
         .attr("height", h)
-        .attr("class", "legend");
+        .attr("class", legendClass);
 
       var legend = key.append("defs")
         .append("svg:linearGradient")
@@ -168,8 +182,7 @@ function chart(variable) {
         .style("fill", "url(#gradient)")
         .attr("transform", "translate(20,10)");
 
-    axisUpdate(variable)
-
+    axisUpdate(variable, divId)
     });
 }
 
@@ -183,9 +196,10 @@ function toggle(){
     }
 }
 // Function to update and transition axis
-function axisUpdate(selected_dataset) {
+function axisUpdate(selected_dataset, divId) {
     colorScale(selected_dataset)
-    var svg = d3.select(".legend")
+    var legendClass = "." + divId + "legend";
+    var svg = d3.select(legendClass)
     var yScale = d3.scaleLinear()
     var yAxisCall = d3.axisRight()
     var w = 140, h = 300;
@@ -215,7 +229,7 @@ function axisUpdate(selected_dataset) {
 
     function initAxis() {
         svg.append("g")
-            .attr("class", "y axis")
+            .attr("class", "y axis axis" + divId)
             .attr("transform", "translate(41,10)")
             .call(yAxisCall)
     }
@@ -252,29 +266,33 @@ function rescaleFill(selection, d_extent) {
 // function to plot demographics
 var bars = d3.select(".age-plot")
              .append("svg")
-             .attr("width", 400)
-             .attr("height", 400)
-             .append("g")
+             .attr("width", 200)
+             .attr("height", 250);
 
 
-var ageBins = ["Xunder_5_years", "X10_to_14_years", "X15_to_17_years",
+var ageBins = ["Xunder_5_years", "X5_to_9_years", "X10_to_14_years", "X15_to_17_years",
                "X18_to_21_years", "X22_to_24_years", "X25_to_29_years",
                "X30_to_34_years", "X35_to_39_years", "X40_to_44_years",
                "X45_to_49_years", "X50_to_54_years", "X55_to_59_years",
-               "X5_to_9_years", "X60_and_61_years", "X62_to_64_years",
+               "X60_and_61_years", "X62_to_64_years",
                "X65_and_66_years", "X67_to_69_years", "X70_to_74_years",
                "X75_to_79_years", "X80_to_84_years", "X85_years_and_over"];
+
+bars.selectAll(".age-section").data(ageBins).enter()
+    .append("rect")
+    .attr("class", "age-section")
+    .attr("class", function (d) {return d})
+    .attr("height", 10)
+    .attr("width", 0)
+    .attr("transform", function(d, i) {
+      return "translate(70," + i*12 + ")"
+    })
+    .attr("fill", "blue")
 
 function plotAge(d) {
   ageBins.forEach(function(element) {
     var width = parseFloat(d.properties[element]) * 2.5
     var i = ageBins.indexOf(element)
-    bars.append("rect")
-      .attr("class", element)
-      .attr("height", 10)
-      .attr("width", 0)
-      .attr("transform", "translate(15," + i*12 + ")")
-      .attr("fill", "blue")
 
     var elemClass = "." + element
     d3.select(elemClass)
@@ -288,23 +306,32 @@ function plotAgeRI() {
   d3.json("data/ri_age.json", function(error, data) {
     if (error) throw error;
 
-    bars.selectAll("line").data(data).enter()
-      .append("line")
-      .attr("x1", function(d) { return parseFloat(d.value); })
-      .attr("y1", function(d, i) { return i; })
-      .attr("x2", function(d) { return parseFloat(d.value); })
-      .attr("y2", function(d, i) { return i+10; })
-      .attr("transform", function(d, i) {
-        return "translate(15," + i*11 + ")";
-      })
-      .style("stroke-width", 2)
-      .style("stroke", "black")
+    var ageBars = bars.selectAll("g").data(data).enter().append("g");
+
+    ageBars.append("line")
+        .attr("x1", function(d) { return parseFloat(d.value); })
+        .attr("y1", function(d, i) { return i; })
+        .attr("x2", function(d) { return parseFloat(d.value); })
+        .attr("y2", function(d, i) { return i+10; })
+        .attr("transform", function(d, i) {
+          return "translate(70," + i*11 + ")";
+        })
+        .style("stroke-width", 2)
+        .style("stroke", "black");
+
+    ageBars.append("text")
+        .attr("x", 50)
+        .attr("y", function(d, i) { return i*12; })
+        .text(function(d) { return d.text; })
+        .attr("text-anchor", "end");
+
+    ageBars.selectAll("text").attr("transform", "translate(10,9)")
   });
 }
 
 // Race plot
 var rWidth = 300,
-    rHeight = 400;
+    rHeight = 200;
 
 var raceBar = d3.select('.race-plot')
   .append('svg')
@@ -360,27 +387,50 @@ function plotRaceRI() {
       })
       .style("stroke-width", 3)
       .style("stroke", "black")
+
+    raceAll.selectAll("text").data(data).enter()
+      .append("text")
+      .attr("class", "race-lable")
+      .attr("x", 30)
+      .attr("y", function(d, i) { return i*25; })
+      .text(function (d) { return d.race; })
+      .attr("text-anchor", "end")
+
+    d3.selectAll(".race-lable")
+      .attr("transform", "translate(190,12)")
   });
 }
 
-
 // function to display data on the side
 function displayData(d) {
-  var selectedVar = document.getElementById("dropdown")
+  var selectedVar = document.getElementById("dropdown");
+  var selectedVar2 = document.getElementById("dropdown-right");
+  var var1 = selectedVar.options[selectedVar.selectedIndex];
+  var var2 = selectedVar2.options[selectedVar2.selectedIndex];
 
+  d3.select(".center-col")
+    .style("background-color", "#f0f0f0")
   d3.select(".town")
     .text(d.properties.NAME)
   d3.select(".blockgroup")
     .text("Blockgroup: " + d.properties.bg_id)
-  d3.select(".variable")
-    .text(selectedVar.options[selectedVar.selectedIndex].text)
-  d3.select(".value")
-    .text(parseFloat(d.properties[selected_dataset]));
+  d3.select(".variable.left")
+    .text(var1.text)
+  d3.select(".value.left")
+    .text(parseFloat(d.properties[var1.value]))
+  d3.select(".variable.right")
+    .text(var2.text)
+  d3.select(".value.right")
+    .text(parseFloat(d.properties[var2.value]))
 }
 
 // functions to zoom on block group path
 function clicked(d) {
   var x, y, k;
+
+  var pathClass = this.getAttribute("class").split(" ")[0];
+  var g2 = d3.selectAll("." + pathClass);
+
 
   if (d && centered !== d) {
     var centroid = path.centroid(d);
@@ -395,24 +445,32 @@ function clicked(d) {
     centered = null;
   }
 
-  g.selectAll("path")
+  console.log(pathClass)
+
+  g2.selectAll("." + pathClass)
       .classed("active", centered && function(d) { return d === centered; });
 
-  g.transition()
+  g2.transition()
       .duration(750)
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-      .style("stroke-width", 1.5 / k + "px");
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")");
 }
 
 // Dropdown change updates
-var dropDown = d3.select("#dropdown");
+function updateData(dropdownId, divId) {
+  var dropDown = d3.select("#" + dropdownId);
 
-dropDown.on("change", function() {
-  d3.select(".y.axis").remove()
-  selected_dataset = d3.select("#dropdown").property("value");
-  map.call(updateFill, selected_dataset)
-  axisUpdate(selected_dataset)
-});
+  dropDown.on("change", function() {
+    d3.select(".axis" + divId).remove()
+    selected_dataset = d3.select("#" + dropdownId).property("value");
+    d3.selectAll("." + divId)
+      .call(updateFill, selected_dataset)
+    axisUpdate(selected_dataset, divId)
+  });
+}
 
 // plot init
-chart(d3.select("#dropdown").property("value"))
+chart(d3.select("#dropdown").property("value"), "dropdown", "map")
+chart(d3.select("#dropdown-right").property("value"), "dropdown-right", "map-right")
+
+updateData("dropdown", "map")
+updateData("dropdown-right", "map-right")
