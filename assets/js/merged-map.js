@@ -35,11 +35,14 @@ populateDropdown("dropdown");
 populateDropdown("dropdown-right");
 
 //Width and height of map
-var width = 600,
-    height = 692,
-    centered;
+var viewportWidth = $(window).width();
+var viewportHeight = $(window).height()/2;
+var width = viewportWidth / 3;
+var height = viewportHeight / 0.7;
 
-var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolateBlues(i)})
+var centered;
+
+var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolateOrRd(i)})
 
 var lowColor = _.first(colorRange) // '#f9f9f9'
 var highColor = _.last(colorRange) // '#bc2a66'
@@ -81,32 +84,15 @@ function initMap(divId) {
   return g;
 }
 
-var minVal;
-var maxVal;
-
 var selected_dataset = "BMI_M";
 
-// Function to calculate color scale and min, max values based on csv data
-function colorScale(selected_dataset) {
-  d3.csv("data/data.csv", function(data) {
-    var dataArray = [];
-    for (var d = 0; d < data.length; d++) {
-      dataArray.push(parseFloat(data[d][selected_dataset]))
-    }
-    minVal = d3.min(dataArray)
-    maxVal = d3.max(dataArray)
-  });
-}
-
 function chart(variable, dropdown, divId) {
-    colorScale(variable)
     // Load GeoJSON data and merge with states data
     d3.json("data/merged.json", function(error, topology) {
 			if (error) throw error;
       g = initMap(divId)
 
       // Bind the data to the SVG and create one path per GeoJSON feature
-      var selectedVar = document.getElementById(dropdown)
 
       // var bbox = path.bounds(topology.features[0])
       // var s = .95 / Math.max((bbox[1][0] - bbox[0][0]) / width, (bbox[1][1] - bbox[0][1]) / height);
@@ -129,6 +115,7 @@ function chart(variable, dropdown, divId) {
         .style("fill-opacity", "0.8")
         .call(updateFill, variable)
         .on("mouseover", function(d) {
+          d3.select(".start-window").remove()
           var c = "." + this.getAttribute("class").split(" ")[1];
           d3.selectAll(c)
             .style("stroke-width", "3")
@@ -150,6 +137,15 @@ function chart(variable, dropdown, divId) {
       var w = 140, h = 300;
 
       var legendClass = "legend " + divId + "legend";
+
+      var selectedVar = d3.select("#" + dropdown).property("value");
+      var extent = d3.extent(topology.features, function(d) {return d.properties[selectedVar]; });
+
+      var scale = d3.scaleLinear()
+        .range([h,0])
+        .domain(extent);
+
+      var axis = d3.axisRight(scale);
 
       var key = d3.select("#" + divId)
         .append("svg")
@@ -182,7 +178,11 @@ function chart(variable, dropdown, divId) {
         .style("fill", "url(#gradient)")
         .attr("transform", "translate(20,10)");
 
-    axisUpdate(variable, divId)
+      key.append("g")
+        .attr("class", "y axis" + divId)
+        .attr("transform", "translate(41,10)")
+        .call(axis);
+
     });
 }
 
@@ -195,54 +195,6 @@ function toggle(){
         fn[i++]();
     }
 }
-// Function to update and transition axis
-function axisUpdate(selected_dataset, divId) {
-    colorScale(selected_dataset)
-    var legendClass = "." + divId + "legend";
-    var svg = d3.select(legendClass)
-    var yScale = d3.scaleLinear()
-    var yAxisCall = d3.axisRight()
-    var w = 140, h = 300;
-
-    setScale1()
-    initAxis()
-
-    setInterval(toggle(
-        function(){
-            setScale2()
-            updateAxis()
-        },
-        function(){
-            setScale1()
-            updateAxis()
-        }), 1000)
-
-    function setScale1(){
-        yScale.domain([minVal, maxVal]).range([h, 0])
-        yAxisCall.scale(yScale)
-    }
-
-    function setScale2(){
-        yScale.domain([minVal, maxVal]).range([h, 0])
-        yAxisCall.scale(yScale)
-    }
-
-    function initAxis() {
-        svg.append("g")
-            .attr("class", "y axis axis" + divId)
-            .attr("transform", "translate(41,10)")
-            .call(yAxisCall)
-    }
-
-    function updateAxis(){
-        var t = d3.transition()
-            .duration(200)
-        svg.select(".y")
-            .transition(t)
-            .call(yAxisCall)
-    }
-}
-
 // Functions to update and transition path fill
 function updateFill(selection, selected_dataset) {
     var d_extent = d3.extent(selection.data(), function(d) {
@@ -262,6 +214,27 @@ function rescaleFill(selection, d_extent) {
                   return fill_viridis(norm_fill(datum));
   });
 }
+
+function updateAxis(selected_dataset, divId) {
+  var selection = d3.select("." + divId).data();
+
+  var extent = d3.extent(selection, function(d) {
+      return parseFloat(d.properties[selected_dataset]);
+  });
+
+  var w = 140, h = 300;
+  
+  scale = d3.scaleLinear()
+    .range([h,0])
+    .domain(extent);
+
+  axis = d3.axisRight(scale);
+
+  d3.select(".axis" + divId)
+    .transition()
+    .call(axis);
+}
+
 
 // function to plot demographics
 var bars = d3.select(".age-plot")
@@ -287,7 +260,7 @@ bars.selectAll(".age-section").data(ageBins).enter()
     .attr("transform", function(d, i) {
       return "translate(70," + i*12 + ")"
     })
-    .attr("fill", "blue")
+    .attr("fill", "grey")
 
 function plotAge(d) {
   ageBins.forEach(function(element) {
@@ -414,6 +387,11 @@ function displayData(d) {
     .text(d.properties.NAME)
   d3.select(".blockgroup")
     .text("Blockgroup: " + d.properties.bg_id)
+
+  d3.selectAll(".current-value")
+    .style("border-radius", "3px")
+    .style("background-color", "#007bff")
+
   d3.select(".variable.left")
     .text(var1.text)
   d3.select(".value.left")
@@ -460,17 +438,16 @@ function updateData(dropdownId, divId) {
   var dropDown = d3.select("#" + dropdownId);
 
   dropDown.on("change", function() {
-    d3.select(".axis" + divId).remove()
     selected_dataset = d3.select("#" + dropdownId).property("value");
     d3.selectAll("." + divId)
-      .call(updateFill, selected_dataset)
-    axisUpdate(selected_dataset, divId)
+      .call(updateFill, selected_dataset);
+    updateAxis(selected_dataset, divId);
   });
 }
 
 // plot init
-chart(d3.select("#dropdown").property("value"), "dropdown", "map")
-chart(d3.select("#dropdown-right").property("value"), "dropdown-right", "map-right")
+chart(d3.select("#dropdown").property("value"), "dropdown", "map");
+chart(d3.select("#dropdown-right").property("value"), "dropdown-right", "map-right");
 
-updateData("dropdown", "map")
-updateData("dropdown-right", "map-right")
+updateData("dropdown", "map");
+updateData("dropdown-right", "map-right");

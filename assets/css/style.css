@@ -35,6 +35,22 @@ body {
   height: 80%;
 	padding: 1.5rem;
 }
+.start-window {
+	min-height: 100%;
+	background-color: #f0f0f0;
+	font-family: "ardoise-std",sans-serif;
+}
+.start-window h1 {
+	text-align: center;
+	font-family: "brother-1816",sans-serif;
+	font-weight: bold;
+	margin-bottom: 2rem;
+	text-decoration: underline;
+	text-decoration-color: #007bff;
+}
+.start-window h5 {
+	margin-top: 2rem;
+}
 .map-container {
   margin-top: 4rem;
 	margin-left: 2rem;
@@ -60,6 +76,13 @@ body {
 }
 .current-value {
 	text-align: center;
+	max-width: 10vw;
+	padding: 1rem;
+	color: white
+}
+.variable {
+	font-family: "ardoise-std",sans-serif;
+	font-size: 0.9rem;
 }
 .demographics-plots {
 	margin-top: 2rem;

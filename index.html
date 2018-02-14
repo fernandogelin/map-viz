@@ -5,6 +5,7 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
@@ -27,12 +28,20 @@
 	  <div id="map" class="col-md-4">
 		</div>
 	  <div class="col-md-4 center-col">
+			<div class="start-window p-4">
+				<h1>RI720</h1>
+				<h4> The RI 720 interactive visualization gives a comprehensive view of social indicators in Rhode Island –
+						economics, education, health, environment and crime. Select an indicator for each map.
+					 This data visualization demonstrates the need for integrated policy to effectively alleviate poverty. </h4>
+				<h5 class="text-muted">Select the indicators and hover over the block groups on the maps to get started.</h5>
+				<h5 class="text-muted">Then, choose between <i>correlations</i> and <i>demographics</i> to learn more about the indicators.</h5>
+			</div>
 	    <div class="stats-table">
 				<div class="town-heading">
 				<h2 class="row town"></h2>
 	      <h4 class="row blockgroup"></h4>
 			</div>
-	      <div class="row d-flex justify-content-center">
+	      <div class="row d-flex justify-content-around">
 					<div class="current-value left col-md-6">
 			      <p class="variable left"></p>
 			      <h1 class="value left"></h1>
