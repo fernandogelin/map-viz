@@ -216,14 +216,14 @@ function rescaleFill(selection, d_extent) {
 }
 
 function updateAxis(selected_dataset, divId) {
-  var selection = d3.select("." + divId).data();
+  var selection = d3.selectAll("." + divId).data();
 
   var extent = d3.extent(selection, function(d) {
       return parseFloat(d.properties[selected_dataset]);
   });
 
   var w = 140, h = 300;
-  
+
   scale = d3.scaleLinear()
     .range([h,0])
     .domain(extent);
