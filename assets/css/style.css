@@ -35,6 +35,10 @@ body {
   height: 80%;
 	padding: 1.5rem;
 }
+.plots {
+	margin-top: 3rem;
+	width: 120%;
+}
 .start-window {
 	min-height: 100%;
 	background-color: #f0f0f0;
@@ -57,6 +61,9 @@ body {
   z-index: -1;
   background-color: "blue";
 }
+#map {
+	margin-left: -3.9rem;
+}
 #map-right {
 	margin-left: 0rem;
 }
@@ -72,7 +79,8 @@ body {
 .town-heading {
 	min-height: 20vh;
 	padding-left: 2rem;
-	margin-left: 2.2rem;
+	padding-bottom: 2rem;
+	margin-top: 2rem;
 }
 .current-value {
 	text-align: center;
@@ -86,7 +94,10 @@ body {
 }
 .demographics-plots {
 	margin-top: 2rem;
-	margin-left: 4rem;
+	margin-left: 3rem;
+}
+.scatterplot {
+	visibility:hidden;
 }
 text {
 	font-family: "ardoise-std",sans-serif;

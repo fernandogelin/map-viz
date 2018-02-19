@@ -14,18 +14,10 @@
 
 </head>
 <body>
-	<div class="row dropdown">
+	<div class="row map-container d-flex justify-content-center">
 		<div class="col-md-4">
 			<select id="dropdown" class="dropdown left btn btn-outline-primary"></select>
-		</div>
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-4">
-			<select id="dropdown-right" class="dropdown right btn btn-outline-primary"></select>
-		</div>
-	</div>
-	<div class="row map-container d-flex justify-content-center">
-	  <div id="map" class="col-md-4">
+		  <div id="map"></div>
 		</div>
 	  <div class="col-md-4 center-col">
 			<div class="start-window p-4">
@@ -40,16 +32,9 @@
 				<div class="town-heading">
 				<h2 class="row town"></h2>
 	      <h4 class="row blockgroup"></h4>
-			</div>
+				</div>
 	      <div class="row d-flex justify-content-around">
-					<div class="current-value left col-md-6">
-			      <p class="variable left"></p>
-			      <h1 class="value left"></h1>
-					</div>
-					<div class="current-value right col-md-6">
-						<p class="variable right"></p>
-						<h1 class="value right"></h1>
-					</div>
+					<div class="scatterplot"></div>
 	    	</div>
 				<div class="demographics">
 					<div class="row demographics-plots">
@@ -61,9 +46,14 @@
 				</div>
 	    </div>
 	  </div>
-		<div id="map-right" class="col-md-4"></div>
+		<div class="col-md-4">
+			<select id="dropdown-right" class="dropdown right btn btn-outline-primary"></select>
+			<div id="map-right"></div>
+		</div>
+	</div>
 	</div>
 </body>
 
 <script src="assets/js/merged-map.js"></script>
+
 </html>
