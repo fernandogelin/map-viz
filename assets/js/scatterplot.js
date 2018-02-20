@@ -12,7 +12,7 @@ function scatterplot(xVar, yVar) {
     });
 
     decimalFormat = d3.format("0.2f");
-    var h = 400, w = 550;
+    var h = height/1.7, w = width;
 
     x = d3.scaleLinear()
         .range([0, w]);
@@ -32,27 +32,27 @@ function scatterplot(xVar, yVar) {
     y.domain(d3.extent(data, function (d) { return d[yVar]; })).nice();
 
     var svg = d3.select(".scatterplot").append("svg")
-              .attr("height", h-100)
+              .attr("height", h+10)
               .attr("width", w)
-              .attr("transform", "translate(10,10)")
+              .attr("transform", "translate(" + w/20 +",0)");
 
     svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(36," + h*0.57  + ")")
-        .call(xAxis)
+        .attr("transform", "translate(30," + h/1.7 + ")")
+        .call(xAxis);
 
     svg.append("g")
         .attr("class", "y axis")
-        .attr("transform", "translate(35,5)")
-        .call(yAxis)
+        .attr("transform", "translate(30,10)")
+        .call(yAxis);
 
     svg.selectAll("circle").data(data).enter()
        .append("circle")
        .attr("cx", function(d) { return parseFloat(x(d[xVar]));})
        .attr("cy", function(d) { return parseFloat(y(d[yVar]));})
        .attr("r", 3)
+       .attr("transform", "translate(30,10)")
        .attr("class", function(d) { return "point b" + d['bg_id']})
-       .attr("transform", "translate(40,0)")
        .style("fill", "steelblue")
        .style("fill-opacity", 0.5)
        .on("mouseover", mouseover)
@@ -81,14 +81,15 @@ function scatterplot(xVar, yVar) {
            .attr("y2", function(d) {return y(d[3]); })
            .attr("stroke", "gray")
            .attr("stroke-width", 2)
-           .attr("transform", "translate(40,0)");
+           .attr("transform", "translate(30,10)");
 
      svg.append("text")
-         .text("r=" + decimalFormat(coefficients[3]))
+         .text(decimalFormat(coefficients[3]))
          .attr("class", "text-label")
-         .attr("x", function(d) {return x(x2) - 60;})
-         .attr("y", function(d) {return y(y2) - 200;})
-         .attr("fill", "gray");
+         .attr("x", w/2)
+         .attr("y", 0)
+         .attr("fill", "gray")
+         .attr("transform", "translate(-50,10)");
 
   });
 }
@@ -122,7 +123,9 @@ function updateScatterplot(xVar, yVar) {
     });
 
     decimalFormat = d3.format("0.2f");
-    var h = 400, w = 550;
+
+    h = height * 0.6;
+    w = width;
 
     x = d3.scaleLinear()
         .range([0, w]);
@@ -144,11 +147,13 @@ function updateScatterplot(xVar, yVar) {
     var svg = d3.select(".scatterplot")
 
     svg.select(".x.axis")
+        .attr("transform", "translate(30," + h/1.7 + ")")
         .transition()
         .duration(1000)
         .call(xAxis)
 
     svg.select(".y.axis")
+        .attr("transform", "translate(30,10)")
         .transition()
         .duration(1000)
         .call(yAxis)
@@ -170,13 +175,20 @@ function updateScatterplot(xVar, yVar) {
    y2 = coefficients[0] * x2 + coefficients[1];
    pearson = coefficients[3]
 
-   regressionData = [[x1, y1, x2, y2]];
-
    svg.select(".regressionline")
          .transition()
-         .attr("x1", function(d) {return x(d[0]); })
-         .attr("y1", function(d) {return y(d[1]); })
-         .attr("x2", function(d) {return x(d[2]); })
-         .attr("y2", function(d) {return y(d[3]); });
+         .duration(2000)
+         .attr("x1", function(d) {return x(x1); })
+         .attr("y1", function(d) {return y(y1); })
+         .attr("x2", function(d) {return x(x2); })
+         .attr("y2", function(d) {return y(y2); });
+
+
+   svg.select(".text-label")
+     .tween("text", function() {
+       return d3.interpolate(this.textContext, decimalFormat(coefficients[3]))
+     })
+
+
   });
 }

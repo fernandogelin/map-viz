@@ -1,0 +1,362 @@
+@import url("https://use.typekit.net/xzf6qrz.css")
+
+html
+  font-size: $base-font-size
+  font-synthesis: none
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -moz-font-smoothing: antialiased
+  font-smoothing: antialiased
+  color: $base-font-color
+  +respond-to(smaller-screens)
+    font-size: $small-font-size
+
+body
+  line-height: $base-line-height
+  font-family: $base-font-family
+  &.baseline
+    background-image: linear-gradient(to bottom, #4BB 0, rgba(255,255,255,0) 1px)
+    background-repeat: repeat-y
+    background-size: 100% $base-line-height
+
+h1, h2, h3, h4, h5, h6, p, blockquote, ol, ul
+  margin-bottom: $base-line-height
+
+
+h1, h2, h3, h4, h5, h6
+  font-family: $heading-font-family
+  font-weight: $heading-font-weight
+
+h1
+  +type-scale(6)
+  +respond-to(smaller-screens)
+    +type-scale(4)
+
+h2
+  +type-scale(4)
+
+h3
+  +type-scale(3)
+
+h2, h3, h4, h5, h6
+  position: relative
+  top: 1rem
+
+blockquote
+  font-style: italic
+  color: #666
+  margin-left: 6ex
+  margin-right: 6ex
+  +respond-to(smaller-screens)
+    margin-left: 4ex
+    margin-right: 0
+  cite
+    +type-scale(2)
+    display: block
+    margin-top: -$base-line-height
+    text-align: center
+    +respond-to(smaller-screens)
+      text-align: left
+
+a
+  text-decoration: none
+  color: $link-color
+  &:hover
+    text-decoration: underline
+  &:visited
+    color: $link-visited-color
+
+em, i
+  font-style: italic
+
+strong, b
+  font-weight: 700
+
+ul, ol
+  +type-scale(2)
+  margin-left: 6ex
+  margin-right: 6ex
+  list-style: disc outside
+  +respond-to(smaller-screens)
+    margin-left: 4ex
+    margin-right: 0
+
+ol
+  list-style-type: lower-roman
+
+dl
+  +type-scale(2)
+  display: flex
+  flex-wrap: wrap
+  margin-bottom: $base-line-height
+  +respond-to(smaller-screens)
+    display: block
+    margin-left: 4ex
+dt
+  flex: 0 1 25%
+  padding-right: 5%
+  font-weight: 700
+  text-align: right
+  +respond-to(smaller-screens)
+    display: inline
+    padding-right: 0
+    text-align: left
+    &::after
+      content: ":  "
+dd
+  flex: 1 0 70%
+  +respond-to(smaller-screens)
+    display: inline
+    &::after
+      content: " "
+      display: block
+      margin-bottom: $base-line-height
+
+code
+  font-family: $code-font-family
+  color: $code-color
+  background-color: $code-bg
+
+.site-header
+  a
+    &, &:visited
+      color: $base-font-color
+  &::after
+    content: " "
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    border-bottom: 1px solid #DDD
+  &.reverse
+    a
+      &, &:visited
+        color: #FFF
+    &::after
+      border-color: #FFF
+
+.site-title
+  +type-scale(1)
+  font-family: $heading-font-family
+  font-weight: 700
+  text-transform: uppercase
+  strong
+      font-family: $logo-font-family
+      letter-spacing: 0.2rem
+  span
+    +respond-to(smaller-screens)
+      display: none
+      visibility: hidden
+
+.site-nav
+  font-family: $logo-font-family
+  +type-scale(1)
+  ul
+    +type-scale(1)
+
+
+.site-footer
+  +type-scale(2)
+  text-align: center
+
+.values
+  h4
+    +type-scale(5)
+  p
+    +type-scale(3)
+
+
+
+// About
+
+.card-text
+  +type-scale(1)
+  line-height: $base-line-height *0.6
+
+.cover-art-caption
+  +type-scale(2)
+  font-family: $heading-font-family
+  text-transform: uppercase
+  opacity: 0.5
+  &, a
+    color: $base-font-color
+  +respond-to(smaller-screens)
+    text-align: center
+
+.team-content
+  +type-scale(2)
+  line-height: $base-line-height *0.7
+
+.team-image
+    background-position: 50% 10% !important
+
+.team-heading-inner
+  h1
+    +type-scale(6)
+    +respond-to(smaller-screens)
+      +type-scale(4)
+
+.career-content
+  h2
+    +type-scale(5)
+    text-decoration: underline
+    text-decoration-color: $yellow
+// Projects
+.project-heading
+  color: $medium-blue
+  +type-scale(7)
+
+.project-categories
+  +type-scale(4)
+
+.card-title
+  font-family: $heading-font-family
+  font-weight: bold
+  +type-scale(2)
+  color: $dark-blue
+  text-decoration-color: $dark-blue
+  +respond-to(smaller-screens)
+    +type-scale(4)
+
+.card-body
+  +respond-to(smaller-screens)
+    +type-scale(4)
+
+.project-status
+  font-family: $heading-font-family
+  font-size: 0.7rem
+  text-decoration: underline
+  text-decoration-color: $yellow
+  font-weight: bold
+
+.card-text
+  +respond-to(smaller-screens)
+    +type-scale(3)
+
+// Education
+
+.edu-banner-text
+  +type-scale(4)
+
+.edu-col
+  +type-scale(3)
+  font-weight: 200
+  h2
+    +type-scale(5)
+    text-decoration: underline
+    text-decoration-color: $light-blue
+
+.edu-heading
+  +type-scale(7)
+
+.btn-edu
+  font-weight: bold
+  +type-scale(2)
+
+// blog
+
+.blog-title-logo
+  letter-spacing: 0.25em
+  font-family: "brother-1816", Helvetica, sans-serif
+  +respond-to(smaller-screens)
+    +type-scale(5)
+
+.blog-heading
+  color: white
+  +type-scale(4)
+
+.blog-subtitle
+  +type-scale(5)
+
+.blog-date-list
+  font-weight: lighter
+  +type-scale(2)
+
+.blog-category-main
+  +type-scale(4)
+  font-weight: lighter
+  +respond-to(smaller-screens)
+    +type-scale(1)
+
+.blog-category
+  +type-scale(1)
+  font-weight: 300
+
+.card-blog-title
+  +type-scale(4)
+
+.card-blog-author
+  +type-scale(2)
+
+
+// Home
+.banner-col-left
+  h1
+    +type-scale(6)
+    letter-spacing: 0.25em
+    font-family: "brother-1816", Helvetica, sans-serif
+    line-height: 1.65em
+  p
+    +type-scale(6)
+    font-style: italic
+    font-weight: bold
+    font-family: "brother-1816"
+    +respond-to(smaller-screens)
+      +type-scale(3)
+
+.card-banner
+  .card-title
+    +type-scale(6)
+  .card-text
+    +type-scale(4)
+
+.impact-box
+  +type-scale(4)
+  li
+    +type-scale(3)
+
+.impact
+  h2
+    +type-scale(6)
+
+.partners
+  h2
+    +type-scale(4)
+
+// Footer
+
+.social-media
+  p
+    font-weight: bold
+    +type-scale(4)
+  span
+    +type-scale(6)
+
+.footer-col-1
+  p
+    +type-scale(1)
+    margin-bottom: 0.2* $base-line-height
+    line-height: 0.7* $base-line-height
+  span
+    +type-scale(2)
+
+.footer-col-3
+  ul
+    +type-scale(1)
+    line-height: $base-line-height * 0.7 !important
+
+.nav-footer
+  a
+    font-style: italic
+    font-size: 0.8rem
+    +respond-to(smaller-screens)
+      font-size: 0.7rem
+  p
+    margin-bottom: -0.3rem
+
+.nav-footer > p
+    font-weight: bold
+    +type-scale(4)
+
+.copyright
+  +type-scale(1)

@@ -96,3 +96,59 @@ function updateData(dropdownId, divId) {
 
   });
 }
+
+function resize() {
+  // Resize Maps
+  width = parseInt(d3.select('#map').style('width'));
+  width = width - margin.left - margin.right;
+  height = width * mapRatio;
+  mapBase = width * 4;
+
+
+  projection = d3.geoMercator()
+        .scale([mapBase * 12.339])
+        .translate([mapBase * 15.528, mapBase * 10]);
+
+  path = d3.geoPath()
+           .projection(projection);
+
+  d3.selectAll(".map").attr("d", path);
+  d3.selectAll(".map-right").attr("d", path);
+
+  d3.selectAll("legend").attr("height", height *0.5)
+
+  // Resize map legend
+  h = height * 0.6;
+  w = width;
+
+  scale.range([h*0.8, 0])
+
+  d3.select('.axismap').call(axis);
+  d3.select('.axismap-right').call(axis);
+
+  d3.selectAll(".color-scale").attr("height", h*0.8+3);
+
+  // Resize Scatterplot
+
+  x.range([0, w/1.2]);
+  y.range([h/1.8, 0]);
+
+  d3.select(".scatterplot")
+    .attr("height", h/1.8+10)
+    .attr("width", w/2)
+    .attr("transform", "translate(" + w/10 +",0)");
+
+  d3.select(".x.axis")
+    .attr("transform", "translate(30," + h/1.7 + ")")
+    .call(xAxis);
+
+  d3.select(".y.axis").call(yAxis);
+
+  var xVar = d3.select(".dropdown.left").property("value");
+  var yVar = d3.select(".dropdown.right").property("value");
+
+  d3.selectAll("circle")
+    .attr("cx", function(d) { return x(d[xVar]); })
+    .attr("cy", function(d) { return y(d[yVar]); })
+
+}

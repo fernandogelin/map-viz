@@ -37,10 +37,11 @@ populateDropdown("dropdown-right");
 
 
 //Width and height of map
-var viewportWidth = $(window).width();
-var viewportHeight = $(window).height()/2;
-var width = 600;
-var height = 700;
+var margin = {top: 10, left: 10, bottom: 10, right: 10}
+  , width = parseInt(d3.select('#map').style('width'))
+  , width = width - margin.left - margin.right
+  , mapRatio = 1.2
+  , height = width * mapRatio;
 
 var centered;
 
@@ -59,16 +60,22 @@ var norm_fill = d3.scaleLinear()
                   .range([0,1]);
 
 // D3 Projection
+var mapBase = width * 4;
 var projection = d3.geoMercator()
-      .scale([32700])
-      .translate([41150, 26500])
+      .scale([mapBase * 12.339])
+      .translate([mapBase * 15.528, mapBase * 10])
 
 // Define path generator
 var path = d3.geoPath() // path generator that will convert GeoJSON to SVG paths
   .projection(projection); // tell path generator to use albersUsa projection
 
-//Create SVG element and append map to the SVG
+var scale = d3.scaleLinear();
 
+var axis = d3.axisRight();
+
+d3.select(window).on('resize', resize);
+
+//Create SVG element and append map to the SVG
 function initMap(divId) {
   var svg = d3.select("#" + divId)
     .append("svg")
@@ -120,25 +127,23 @@ function chart(variable, dropdown, divId) {
         .on("mouseout", mouseout)
         .on("click", clicked)
 
-      var w = 140, h = 350;
+      var w = width * 0.1, h = 350;
 
       var legendClass = "legend " + divId + "legend";
 
       var selectedVar = d3.select("#" + dropdown).property("value");
       var extent = d3.extent(topology.features, function(d) {return d.properties[selectedVar]; });
 
-      var scale = d3.scaleLinear()
-        .range([h,0])
-        .domain(extent);
+      scale.range([h,0]).domain(extent);
 
-      var axis = d3.axisRight(scale);
+      axis = d3.axisRight(scale);
 
       var key = d3.select("#" + divId)
         .append("svg")
         .attr("width", w)
-        .attr("height", h)
+        .attr("height", h+10)
         .attr("class", legendClass)
-        .attr("transform", "translate(20,60)");
+        .attr("transform", "translate(20,100)");
 
       var legend = key.append("defs")
         .append("svg:linearGradient")
@@ -160,14 +165,14 @@ function chart(variable, dropdown, divId) {
         .attr("stop-opacity", 1);
 
       key.append("rect")
-        .attr("width", w - 120)
-        .attr("height", h)
-        .style("fill", "url(#gradient)")
-        .attr("transform", "translate(20,30)");
+        .attr("class", "color-scale")
+        .attr("width", "10px")
+        .attr("height", h+3)
+        .style("fill", "url(#gradient)");
 
       key.append("g")
         .attr("class", "y axis" + divId)
-        .attr("transform", "translate(41,30)")
+        .attr("transform", "translate(10,0)")
         .call(axis);
 
     });
