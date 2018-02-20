@@ -1,18 +1,10 @@
-var Chart = (function(window,d3) {
-  var xVar = d3.select(".dropdown.left").property("value");
-  var yVar = d3.select(".dropdown.right").property("value");
 
-  var svg, data, x, y, xAxis, yAxis, margin = {}, width, height, heightTop, decimalFormat, x1, x2, y1, y2, coefficients, xSeries, ySeries, regressionData, pearson;
-
-  d3.csv('data/ri_dat.csv', render);
-
-  function render(csv) {
-    var breakPoint = 768;
-    data = csv;
-
+function scatterplot(xVar, yVar) {
+  d3.csv("data/ri_dat.csv", function(error, data) {
+    if (error) throw error;
     data = data.filter(function(d){
-              return (!isNaN(d[xVar]) && !isNaN(d[yVar]));
-          });
+             return (!isNaN(d[xVar]) && !isNaN(d[yVar]));
+         });
 
     data.forEach(function (d) {
       d[xVar] = +d[xVar];
@@ -20,11 +12,12 @@ var Chart = (function(window,d3) {
     });
 
     decimalFormat = d3.format("0.2f");
-    //initialize scales
+    var h = 400, w = 550;
+
     x = d3.scaleLinear()
-        .range([0, width]);
+        .range([0, w]);
     y = d3.scaleLinear()
-        .range([height, 0]);
+        .range([h, 0]);
 
     //initialixe axis
     xAxis = d3.axisBottom()
@@ -32,125 +25,158 @@ var Chart = (function(window,d3) {
     yAxis = d3.axisLeft()
         .scale(y);
 
-    //initialize svg
-    svg = d3.select(".scatterplot").append("svg");
-
-    //get dimensions based on window size
-    updateDimensions(window.innerWidth);
-
-    x.range([0, width]);
-    y.range([height, 0]);
+    x.range([0, w/1.2]);
+    y.range([h/1.8, 0]);
 
     x.domain(d3.extent(data, function (d) { return d[xVar]; })).nice();
     y.domain(d3.extent(data, function (d) { return d[yVar]; })).nice();
 
-    svg
-      .attr('width', width + margin.right + margin.left)
-      .attr('height', height + margin.top + margin.bottom);
-
-
-    xSeries = d3.values(data.map(function (d) { return d[xVar]; }));
-    ySeries = d3.values(data.map(function (d) { return d[yVar]; }));
-    coefficients = leastSquares(xSeries, ySeries);
-
-    x1 = _.min(xSeries);
-    y1 = coefficients[0] * x1 + coefficients[1];
-    x2 = _.max(xSeries);
-    y2 = coefficients[0] * x2 + coefficients[1];
-    pearson = coefficients[3]
-
-    regressionData = [[x1, y1, x2, y2]];
-
-    svg.selectAll(".regressionline")
-          .data(regressionData)
-        .enter()
-          .append("line")
-          .attr("class", "regressionline")
-          .attr("x1", function(d) {return x(d[0]); })
-          .attr("y1", function(d) {return y(d[1]); })
-          .attr("x2", function(d) {return x(d[2]); })
-          .attr("y2", function(d) {return y(d[3]); })
-          .attr("stroke", "gray")
-          .attr("stroke-width", 2);
-
-    svg.append("text")
-        .text("r=" + decimalFormat(coefficients[3]))
-        .attr("class", "text-label")
-        .attr("x", function(d) {return x(x2) - 60;})
-        .attr("y", function(d) {return y(y2) - 200;})
-        .attr("fill", "gray");
+    var svg = d3.select(".scatterplot").append("svg")
+              .attr("height", h-100)
+              .attr("width", w)
+              .attr("transform", "translate(10,10)")
 
     svg.append("g")
         .attr("class", "x axis")
+        .attr("transform", "translate(36," + h*0.57  + ")")
         .call(xAxis)
-      .append("text")
-        .attr("class", "label")
-        .attr("x", width)
-        .attr("y", -6)
-        .style("text-anchor", "end")
-        .text("Average math SAT score");
 
     svg.append("g")
         .attr("class", "y axis")
+        .attr("transform", "translate(35,5)")
         .call(yAxis)
-      .append("text")
-        .attr("class", "label")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .style("text-anchor", "end")
-        .text("Average BMI");
 
-    svg.selectAll(".dot")
-        .data(data)
-      .enter().append("circle")
-        .attr("class", "dot")
-        .attr("r", 4)
-        .attr("cx", function (d) { return x(d[xVar]); })
-        .attr("cy", function (d) {return y(d[yVar]); })
-        .style("fill", "steelblue")
-        .style("fill-opacity", 0.5);
+    svg.selectAll("circle").data(data).enter()
+       .append("circle")
+       .attr("cx", function(d) { return parseFloat(x(d[xVar]));})
+       .attr("cy", function(d) { return parseFloat(y(d[yVar]));})
+       .attr("r", 3)
+       .attr("class", function(d) { return "point b" + d['bg_id']})
+       .attr("transform", "translate(40,0)")
+       .style("fill", "steelblue")
+       .style("fill-opacity", 0.5)
+       .on("mouseover", mouseover)
+       .on("mouseout", mouseout)
 
-    d3.selectAll(".y, circle, .regressionline, .text-label")
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+     xSeries = d3.values(data.map(function (d) { return d[xVar]; }));
+     ySeries = d3.values(data.map(function (d) { return d[yVar]; }));
+     coefficients = leastSquares(xSeries, ySeries);
 
-    d3.selectAll(".x")
-      .attr('transform', 'translate(' + margin.left + ',' + heightTop +')');
+     x1 = _.min(xSeries);
+     y1 = coefficients[0] * x1 + coefficients[1];
+     x2 = _.max(xSeries);
+     y2 = coefficients[0] * x2 + coefficients[1];
+     pearson = coefficients[3]
 
-  }
+     regressionData = [[x1, y1, x2, y2]];
 
-  function updateDimensions(winWidth) {
-    margin.top = 20;
-    margin.right = 20;
-    margin.left = 40;
-    margin.bottom = 30;
+     svg.selectAll(".regressionline")
+           .data(regressionData)
+         .enter()
+           .append("line")
+           .attr("class", "regressionline")
+           .attr("x1", function(d) {return x(d[0]); })
+           .attr("y1", function(d) {return y(d[1]); })
+           .attr("x2", function(d) {return x(d[2]); })
+           .attr("y2", function(d) {return y(d[3]); })
+           .attr("stroke", "gray")
+           .attr("stroke-width", 2)
+           .attr("transform", "translate(40,0)");
 
-    width = winWidth/2 - margin.left - margin.right;
-    height = .7 * width;
-    heightTop = height + margin.top;
-  }
+     svg.append("text")
+         .text("r=" + decimalFormat(coefficients[3]))
+         .attr("class", "text-label")
+         .attr("x", function(d) {return x(x2) - 60;})
+         .attr("y", function(d) {return y(y2) - 200;})
+         .attr("fill", "gray");
 
-  function leastSquares(a, b) {
-    var sumSeries =  function (sum, val) {return sum + val; };
-    var xhat = a.reduce(sumSeries) / a.length;
-    var yhat = b.reduce(sumSeries) / b.length;
-    var sumSquaresXX = a.map( function (d) { return Math.pow(d - xhat, 2);})
-      .reduce(sumSeries);
-    var sumSquaresYY = b.map( function (d) { return Math.pow(d - yhat, 2);})
-      .reduce(sumSeries);
-    var XY = a.map(function (d,i) { return (d - xhat) * (b[i] - yhat);})
-      .reduce(sumSeries);
+  });
+}
 
-    var slope = XY / sumSquaresXX;
-    var intercept = yhat - (xhat * slope);
-    var rSquare = Math.pow(XY, 2) / (sumSquaresXX * sumSquaresYY);
-    var pearsonR = XY / (Math.sqrt(sumSquaresXX) * Math.sqrt(sumSquaresYY))
+function updateScatterplot(xVar, yVar) {
+  d3.csv("data/ri_dat.csv", function(error, data) {
+    if (error) throw error;
+    nullArray = [];
+    dataNull = data.filter(function(d){
+              return (isNaN(d[xVar]) | isNaN(d[yVar]));
+      });
 
-    return [slope, intercept, rSquare, pearsonR];
-  }
+    d3.selectAll("circle")
+      .style("fill-opacity", 0.5);
 
-  return {
-    render : render
-  }
-})(window,d3);
+    dataNull.forEach(function(d) {
+      nullClass = "b" + d['bg_id']
+      nullArray.push(nullClass);
+      d3.selectAll("circle." + nullClass)
+        .transition()
+        .style("fill-opacity", 0);
+    })
 
-window.addEventListener('resize', Chart.render);
+    data = data.filter(function(d){
+              return (!isNaN(d[xVar]) && !isNaN(d[yVar]));
+      });
+
+    data.forEach(function (d) {
+      d[xVar] = +d[xVar];
+      d[yVar] = +d[yVar];
+    });
+
+    decimalFormat = d3.format("0.2f");
+    var h = 400, w = 550;
+
+    x = d3.scaleLinear()
+        .range([0, w]);
+    y = d3.scaleLinear()
+        .range([h, 0]);
+
+    //initialixe axis
+    xAxis = d3.axisBottom()
+        .scale(x);
+    yAxis = d3.axisLeft()
+        .scale(y);
+
+    x.range([0, w/1.2]);
+    y.range([h/1.8, 0]);
+
+    x.domain(d3.extent(data, function (d) { return d[xVar]; })).nice();
+    y.domain(d3.extent(data, function (d) { return d[yVar]; })).nice();
+
+    var svg = d3.select(".scatterplot")
+
+    svg.select(".x.axis")
+        .transition()
+        .duration(1000)
+        .call(xAxis)
+
+    svg.select(".y.axis")
+        .transition()
+        .duration(1000)
+        .call(yAxis)
+
+    svg.selectAll("circle")
+       .data(data)
+       .transition()
+       .duration(1500)
+       .attr("cx", function(d) { return parseFloat(x(d[xVar]));})
+       .attr("cy", function(d) { return parseFloat(y(d[yVar]));})
+
+   xSeries = d3.values(data.map(function (d) { return d[xVar]; }));
+   ySeries = d3.values(data.map(function (d) { return d[yVar]; }));
+   coefficients = leastSquares(xSeries, ySeries);
+
+   x1 = _.min(xSeries);
+   y1 = coefficients[0] * x1 + coefficients[1];
+   x2 = _.max(xSeries);
+   y2 = coefficients[0] * x2 + coefficients[1];
+   pearson = coefficients[3]
+
+   regressionData = [[x1, y1, x2, y2]];
+
+   svg.select(".regressionline")
+         .transition()
+         .attr("x1", function(d) {return x(d[0]); })
+         .attr("y1", function(d) {return y(d[1]); })
+         .attr("x2", function(d) {return x(d[2]); })
+         .attr("y2", function(d) {return y(d[3]); });
+  });
+}
