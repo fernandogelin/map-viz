@@ -3,7 +3,7 @@
 
 body
 	font: 11px sans-serif
-	background-color: #ffffff
+	background-color: #B0E2FF
 
 /* Legend Position Style */
 .legend
@@ -24,6 +24,7 @@ body
   margin-top: 2rem
 
 .center-col
+	margin-top: -4rem
 	z-index: 200
   height: 80%
 	padding: 1.5rem
@@ -33,7 +34,7 @@ body
 	width: 120%
 
 .start-window
-	min-height: 40%
+	margin-top: 5rem
 	background-color: #f0f0f0
 	h1
 		text-align: center
@@ -52,34 +53,33 @@ body
 
 .race-plot
 	margin-left: 2rem
-	padding-top: 8%
 
 .stats-table
-	font-family: "brother-1816", sans-serif
+	font-family: $heading-font-family
 	font-weight: bold
 
 .town-heading
-	min-height: 20vh
-	padding-left: 2rem
-	padding-bottom: 2rem
-	margin-top: 2rem
-
-.current-value
-	text-align: center
-	max-width: 10vw
-	padding: 1rem
-	color: white
+	margin-top: -3rem
+	margin-left: 2.2rem
+	width: 120%
+	p
+		margin-bottom: 0.2rem
+		font-size: 0.7rem
 
 .variable
 	font-family: "ardoise-std", sans-serif
 	font-size: 0.9rem
 
-.demographics-plots
-	margin-top: 2rem
-	margin-left: 3rem
+.demographics-title
+	text-align: center
+	margin-top: -2rem
 
-.scatterplot
+.scatterplot, .stats-table
 	visibility: hidden
+	margin-left: 1rem
+
+.text-label
+	+type-scale(3)
 
 text
 	font-family: "ardoise-std",sans-serif

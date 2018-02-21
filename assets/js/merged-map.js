@@ -41,11 +41,11 @@ var margin = {top: 10, left: 10, bottom: 10, right: 10}
   , width = parseInt(d3.select('#map').style('width'))
   , width = width - margin.left - margin.right
   , mapRatio = 1.2
-  , height = width * mapRatio;
+  , height = width * mapRatio + 20;
 
 var centered;
 
-var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolateOrRd(i)})
+var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolatePlasma(i)})
 
 var lowColor = _.first(colorRange) // '#f9f9f9'
 var highColor = _.last(colorRange) // '#bc2a66'
@@ -60,7 +60,7 @@ var norm_fill = d3.scaleLinear()
                   .range([0,1]);
 
 // D3 Projection
-var mapBase = width * 4;
+var mapBase = width * 4.7;
 var projection = d3.geoMercator()
       .scale([mapBase * 12.339])
       .translate([mapBase * 15.528, mapBase * 10])
@@ -84,7 +84,7 @@ function initMap(divId) {
 
   svg.append("rect")
       .attr("class", "background")
-      .style("fill", "#fff")
+      .style("fill", "#B0E2FF")
       .attr("width", width)
       .attr("height", height)
       .on("click", clicked);
@@ -119,7 +119,7 @@ function chart(variable, dropdown, divId) {
           return divId + " b" + d.properties.bg_id;
         })
         .attr("d", path)
-        .style("stroke", "#c8c8c8")
+        .style("stroke", "#f8f8f8")
         .style("stroke-width", 0.3)
         .style("fill-opacity", 0.8)
         .call(updateFill, variable)
@@ -200,12 +200,15 @@ function updateFill(selection, selected_dataset) {
 
 function rescaleFill(selection, d_extent) {
     norm_fill.domain(d_extent)
-
     selection.transition()
-             .duration(700)
+             .duration(1200)
              .attr("fill", function(d) {
-                  var datum = parseFloat(d.properties[selected_dataset]);
-                  return fill_viridis(norm_fill(datum));
+              var datum = parseFloat(d.properties[selected_dataset]);
+              if (isNaN(datum)) { return "#fff";
+              } else {
+                return fill_viridis(norm_fill(datum));
+
+              }
   });
 }
 

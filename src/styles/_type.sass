@@ -22,6 +22,11 @@ body
 h1, h2, h3, h4, h5, h6, p, blockquote, ol, ul
   margin-bottom: $base-line-height
 
+p
+  font-family: $base-font-family
+  font-weight: 400
+  +type-scale(2)
+
 
 h1, h2, h3, h4, h5, h6
   font-family: $heading-font-family
@@ -37,10 +42,15 @@ h2
 
 h3
   +type-scale(3)
+  text-decoration: underline
+  text-decoration-color: #007bff
 
 h2, h3, h4, h5, h6
   position: relative
   top: 1rem
+
+text
+  font-weight: normal
 
 blockquote
   font-style: italic

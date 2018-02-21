@@ -1,5 +1,7 @@
 function mouseover() {
   d3.select(".start-window").remove()
+  d3.select(".stats-table").style("visibility", "visible")
+
   var c = "." + this.getAttribute("class").split(" ")[1];
   d3.selectAll(c)
     .style("stroke-width", 4)
@@ -150,5 +152,12 @@ function resize() {
   d3.selectAll("circle")
     .attr("cx", function(d) { return x(d[xVar]); })
     .attr("cy", function(d) { return y(d[yVar]); })
+
+  d3.select(".regressionline")
+    .attr("x1", function(d) {return x(d[0]); })
+    .attr("y1", function(d) {return y(d[1]); })
+    .attr("x2", function(d) {return x(d[2]); })
+    .attr("y2", function(d) {return y(d[3]); })
+    .attr("transform", "translate(" + w/10 +",0)");
 
 }
