@@ -7,9 +7,7 @@ function mouseover() {
     .style("stroke-width", 4)
     .style("fill-opacity", 1)
   d3.select("circle"+c)
-      .style("fill", "red")
-      .transition()
-      .attr("r", 4);
+      .style("fill", "red");
   d3.select(".scatterplot")
     .style("visibility", "visible")
 
@@ -28,9 +26,8 @@ function mouseout() {
     .style("stroke-width", 0.3)
     .style("fill-opacity", 0.8)
   d3.select("circle" + c)
-    .style("fill", "steelblue")
-    .transition()
-    .attr("r", 3)
+    .style("fill", "steelblue");
+
 }
 
 // function to display data

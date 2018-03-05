@@ -45,7 +45,7 @@ var margin = {top: 10, left: 10, bottom: 10, right: 10}
 
 var centered;
 
-var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolatePlasma(i)})
+var colorRange =  _.range(0,2,0.3).map(function(i){return d3.interpolateViridis(i)})
 
 var lowColor = _.first(colorRange) // '#f9f9f9'
 var highColor = _.last(colorRange) // '#bc2a66'
