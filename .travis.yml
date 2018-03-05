@@ -24,7 +24,7 @@ deploy:
     secret_access_key: $AWS_SECRET_ACCESS_KEY
     bucket: $AWS_S3_BUCKET_PROD
     skip_cleanup: true
-    local-dir: ./
+    local-dir: app
     on:
       branch: master
 

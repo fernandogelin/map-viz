@@ -11,7 +11,7 @@ gulp.task("sass", function () {
         .pipe(autoprefixer({
             browsers : ["last 20 versions"]
         }))
-        .pipe(gulp.dest("assets/css"))
+        .pipe(gulp.dest("app/assets/css"))
 })
 
 // Watch asset folder for changes
