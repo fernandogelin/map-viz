@@ -138,10 +138,17 @@ function resize() {
     .attr("transform", "translate(" + w/10 +",0)");
 
   d3.select(".x.axis")
-    .attr("transform", "translate(30," + h/1.7 + ")")
+    .attr("transform", "translate(60," + h/1.7 + ")")
     .call(xAxis);
 
   d3.select(".y.axis").call(yAxis);
+
+  d3.select(".x.label")
+    .attr("transform", "translate(" + w/2 + "," + h/1.4 + ")");
+
+  d3.select(".y.label")
+    .attr("x", -h/4-20);
+
 
   var xVar = d3.select(".dropdown.left").property("value");
   var yVar = d3.select(".dropdown.right").property("value");

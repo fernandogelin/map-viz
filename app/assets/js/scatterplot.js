@@ -48,13 +48,13 @@ function scatterplot(xVar, yVar) {
 
     svg.append("text")
        .attr("class", "x label")
-       .attr("transform", "translate(" + w/1.8 + "," + h/1.4 + ")")
+       .attr("transform", "translate(" + w/2 + "," + h/1.4 + ")")
        .style("text-anchor", "middle")
        .text(d3.select("#" + xVar).text());
 
     svg.append("text")
        .attr("class", "y label")
-       .attr("x", -h/4)
+       .attr("x", -h/4-20)
        .attr("y", 20)
        .attr("transform", "rotate(-90)")
        .style("text-anchor", "middle")
