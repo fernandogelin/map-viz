@@ -4,7 +4,6 @@ var bars = d3.select(".age-plot")
              .attr("width", 200)
              .attr("height", 250);
 
-
 var ageBins = ["Xunder_5_years", "X5_to_9_years", "X10_to_14_years", "X15_to_17_years",
                "X18_to_21_years", "X22_to_24_years", "X25_to_29_years",
                "X30_to_34_years", "X35_to_39_years", "X40_to_44_years",
