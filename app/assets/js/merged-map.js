@@ -84,7 +84,7 @@ function initMap(divId) {
 
   svg.append("rect")
       .attr("class", "background")
-      .style("fill", "#B0E2FF")
+      .style("fill", "none")
       .attr("width", width)
       .attr("height", height)
       .on("click", clicked);

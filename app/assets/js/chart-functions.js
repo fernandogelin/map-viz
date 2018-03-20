@@ -4,7 +4,7 @@ function mouseover() {
 
   var c = "." + this.getAttribute("class").split(" ")[1];
   d3.selectAll(c)
-    .style("stroke-width", 4)
+    .style("stroke-width", 2)
     .style("fill-opacity", 1)
   d3.select("circle"+c)
       .style("fill", "red");

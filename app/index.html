@@ -14,12 +14,22 @@
 
 </head>
 <body>
-	<div class="row map-container d-flex justify-content-center">
+	<div class="row col-md-12 map-container position-fixed">
 		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 map-div left">
 			<select id="dropdown" class="dropdown left btn btn-primary"></select>
 		  <div id="map"></div>
 		</div>
-	  <div class="col-md-4 center-col">
+
+
+		<div class="col-md-4 map-div right">
+			<select id="dropdown-right" class="dropdown right btn btn-primary"></select>
+			<div id="map-right"></div>
+		</div>
+	</div>
+
+		<div class="col-md-4 center-col row">
 			<div class="start-window p-4">
 				<h1>RI720</h1>
 				<h2> The RI 720 interactive visualization gives a comprehensive view of social indicators in Rhode Island –
@@ -55,16 +65,14 @@
 								<p class="town"></p>
 							</div>
 						</div>
+						<small class="text-muted"><span class="black">| </span>indicates Rhode Island average</small>
+
 					</div>
 				</div>
 	    </div>
 	  </div>
-		<div class="col-md-4">
-			<select id="dropdown-right" class="dropdown right btn btn-primary"></select>
-			<div id="map-right"></div>
-		</div>
-	</div>
-	</div>
+
+
 </body>
 
 <script src="assets/js/chart-functions.js"></script>
