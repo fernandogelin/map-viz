@@ -32,7 +32,7 @@ function mouseout() {
 
 // function to display data
 function displayData(d) {
-  var selectedVar = document.getElementById("dropdown");
+  var selectedVar = document.getElementById("dropdown-left");
   var selectedVar2 = document.getElementById("dropdown-right");
   var var1 = selectedVar.options[selectedVar.selectedIndex];
   var var2 = selectedVar2.options[selectedVar2.selectedIndex];
@@ -82,12 +82,16 @@ function clicked(d) {
 // Dropdown change updates
 function updateData(dropdownId, divId) {
   var dropDown = d3.select("#" + dropdownId);
+  var position = dropdownId.split("-")[1];
 
   dropDown.on("change", function() {
     selected_dataset = d3.select("#" + dropdownId).property("value");
     d3.selectAll("." + divId)
       .call(updateFill, selected_dataset);
     updateAxis(selected_dataset, divId);
+
+    d3.select(".data-description." + position).select('text').remove();
+    displayDataDescription(dropdownId);
 
     var xVar = d3.select(".dropdown.left").property("value");
     var yVar = d3.select(".dropdown.right").property("value");
@@ -102,7 +106,6 @@ function resize() {
   width = width - margin.left - margin.right;
   height = width * mapRatio;
   mapBase = width * 4;
-
 
   projection = d3.geoMercator()
         .scale([mapBase * 12.339])
@@ -163,5 +166,4 @@ function resize() {
     .attr("x2", function(d) {return x(d[2]); })
     .attr("y2", function(d) {return y(d[3]); })
     .attr("transform", "translate(" + w/10 +",0)");
-
 }
