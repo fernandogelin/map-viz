@@ -91,9 +91,19 @@ function displayDataDescription(dropdownId) {
   var svg = d3.select(".data-description." + position);
   var description = _.where(dropdown_options, {value: currentValue});
 
-  svg.append('text')
+  var textDescription = svg.append('text')
+    .attr('x', '0')
+    .attr('y', '0')
+    .append('tspan')
+    .attr('x', '0')
+    .attr('dy', '1.2em')
     .attr('transform', 'translate(40,0)')
     .text(description[0].description)
+    
+  textDescription.append('tspan')
+    .attr('x', '0')
+    .attr('dy', '1.2em')
+    .text('Block Groups are statistical divisions of census tracts, they are generally defined to contain between 600 and 3,000 people. A block group consists of clusters of blocks and usually covers a contiguous area. Block groups on the maps that appear in gray have insufficient data for the particular variable. Data sources: Rhode Island Government provided anonymized data for all indicators used on the maps and correlation plot. Demographics plots were created using Census data.')
 }
 
 //Width and height of map

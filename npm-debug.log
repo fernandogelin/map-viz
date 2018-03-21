@@ -1,0 +1,979 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.1
+4 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/package.json
+5 verbose install where, deps [ '/Users/fernandogelin/Documents/map-viz',
+5 verbose install   [ 'd3',
+5 verbose install     'express',
+5 verbose install     'topojson',
+5 verbose install     'topojson-client',
+5 verbose install     'gulp',
+5 verbose install     'gulp-autoprefixer',
+5 verbose install     'gulp-sass' ] ]
+6 verbose install where, peers [ '/Users/fernandogelin/Documents/map-viz', [] ]
+7 verbose installManyTop reading for lifecycle /Users/fernandogelin/Documents/map-viz/package.json
+8 info preinstall pu@0.0.1
+9 verbose installManyTop reading scoped package data from /Users/fernandogelin/Documents/map-viz/node_modules/d3/package.json
+10 verbose installManyTop reading scoped package data from /Users/fernandogelin/Documents/map-viz/node_modules/express/package.json
+11 verbose installManyTop reading scoped package data from /Users/fernandogelin/Documents/map-viz/node_modules/gulp/package.json
+12 verbose installManyTop reading scoped package data from /Users/fernandogelin/Documents/map-viz/node_modules/gulp-autoprefixer/package.json
+13 verbose installManyTop reading scoped package data from /Users/fernandogelin/Documents/map-viz/node_modules/gulp-sass/package.json
+14 verbose installManyTop reading scoped package data from /Users/fernandogelin/Documents/map-viz/node_modules/topojson-client/package.json
+15 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/package.json
+16 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/d3/package.json
+17 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/express/package.json
+18 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/gulp/package.json
+19 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/gulp-autoprefixer/package.json
+20 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/gulp-sass/package.json
+21 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/topojson-client/package.json
+22 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/.bin/gulp/package.json
+23 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topo2geo/package.json
+24 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topomerge/package.json
+25 verbose targetResolver reading package data from /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topoquantize/package.json
+26 verbose already installed skipping gulp-sass@^3.1.0 /Users/fernandogelin/Documents/map-viz
+27 verbose already installed skipping d3@4.x /Users/fernandogelin/Documents/map-viz
+28 verbose already installed skipping express@^4.13.3 /Users/fernandogelin/Documents/map-viz
+29 silly cache add args [ 'topojson@^3.0.2', null ]
+30 verbose cache add spec topojson@^3.0.2
+31 silly cache add parsed spec Result {
+31 silly cache add   raw: 'topojson@^3.0.2',
+31 silly cache add   scope: null,
+31 silly cache add   name: 'topojson',
+31 silly cache add   rawSpec: '^3.0.2',
+31 silly cache add   spec: '>=3.0.2 <4.0.0',
+31 silly cache add   type: 'range' }
+32 silly addNamed topojson@>=3.0.2 <4.0.0
+33 verbose addNamed ">=3.0.2 <4.0.0" is a valid semver range for topojson
+34 silly addNameRange { name: 'topojson', range: '>=3.0.2 <4.0.0', hasData: false }
+35 silly mapToRegistry name topojson
+36 silly mapToRegistry using default registry
+37 silly mapToRegistry registry https://registry.npmjs.org/
+38 silly mapToRegistry uri https://registry.npmjs.org/topojson
+39 verbose addNameRange registry:https://registry.npmjs.org/topojson not in flight; fetching
+40 verbose already installed skipping topojson-client@^3.0.0 /Users/fernandogelin/Documents/map-viz
+41 verbose already installed skipping gulp@^3.9.1 /Users/fernandogelin/Documents/map-viz
+42 verbose already installed skipping gulp-autoprefixer@^4.1.0 /Users/fernandogelin/Documents/map-viz
+43 verbose request uri https://registry.npmjs.org/topojson
+44 verbose request no auth needed
+45 info attempt registry request try #1 at 12:34:43 PM
+46 verbose request id ae0addbd1197fe90
+47 verbose etag "59ab2f36-1f5fb"
+48 verbose lastModified Sat, 2 Sep 2017 22:22:46 GMT
+49 http request GET https://registry.npmjs.org/topojson
+50 http 304 https://registry.npmjs.org/topojson
+51 verbose headers { date: 'Wed, 21 Mar 2018 16:34:43 GMT',
+51 verbose headers   via: '1.1 varnish',
+51 verbose headers   'cache-control': 'max-age=300',
+51 verbose headers   etag: '"59ab2f36-1f5fb"',
+51 verbose headers   age: '8402',
+51 verbose headers   connection: 'keep-alive',
+51 verbose headers   'x-served-by': 'cache-bos8230-BOS',
+51 verbose headers   'x-cache': 'HIT',
+51 verbose headers   'x-cache-hits': '1',
+51 verbose headers   'x-timer': 'S1521650083.412108,VS0,VE0',
+51 verbose headers   vary: 'Accept-Encoding, Accept' }
+52 silly get cb [ 304,
+52 silly get   { date: 'Wed, 21 Mar 2018 16:34:43 GMT',
+52 silly get     via: '1.1 varnish',
+52 silly get     'cache-control': 'max-age=300',
+52 silly get     etag: '"59ab2f36-1f5fb"',
+52 silly get     age: '8402',
+52 silly get     connection: 'keep-alive',
+52 silly get     'x-served-by': 'cache-bos8230-BOS',
+52 silly get     'x-cache': 'HIT',
+52 silly get     'x-cache-hits': '1',
+52 silly get     'x-timer': 'S1521650083.412108,VS0,VE0',
+52 silly get     vary: 'Accept-Encoding, Accept' } ]
+53 verbose etag https://registry.npmjs.org/topojson from cache
+54 verbose get saving topojson to /Users/fernandogelin/.npm/registry.npmjs.org/topojson/.cache.json
+55 silly addNameRange number 2 { name: 'topojson', range: '>=3.0.2 <4.0.0', hasData: true }
+56 silly addNameRange versions [ 'topojson',
+56 silly addNameRange   [ '0.0.1',
+56 silly addNameRange     '0.0.2',
+56 silly addNameRange     '0.0.4',
+56 silly addNameRange     '0.0.5',
+56 silly addNameRange     '0.0.6',
+56 silly addNameRange     '0.0.7',
+56 silly addNameRange     '0.0.8',
+56 silly addNameRange     '0.0.9',
+56 silly addNameRange     '0.0.10',
+56 silly addNameRange     '0.0.11',
+56 silly addNameRange     '0.0.12',
+56 silly addNameRange     '0.0.13',
+56 silly addNameRange     '0.0.14',
+56 silly addNameRange     '0.0.15',
+56 silly addNameRange     '0.0.16',
+56 silly addNameRange     '0.0.17',
+56 silly addNameRange     '0.0.18',
+56 silly addNameRange     '0.0.19',
+56 silly addNameRange     '0.0.20',
+56 silly addNameRange     '0.0.21',
+56 silly addNameRange     '0.0.23',
+56 silly addNameRange     '0.0.24',
+56 silly addNameRange     '0.0.25',
+56 silly addNameRange     '0.0.26',
+56 silly addNameRange     '0.0.27',
+56 silly addNameRange     '0.0.28',
+56 silly addNameRange     '0.0.29',
+56 silly addNameRange     '0.0.30',
+56 silly addNameRange     '0.0.31',
+56 silly addNameRange     '0.0.32',
+56 silly addNameRange     '0.0.33',
+56 silly addNameRange     '0.0.34',
+56 silly addNameRange     '0.0.35',
+56 silly addNameRange     '0.0.36',
+56 silly addNameRange     '0.0.37',
+56 silly addNameRange     '0.0.38',
+56 silly addNameRange     '0.0.39',
+56 silly addNameRange     '1.0.0',
+56 silly addNameRange     '1.1.0',
+56 silly addNameRange     '1.1.1',
+56 silly addNameRange     '1.1.2',
+56 silly addNameRange     '1.1.3',
+56 silly addNameRange     '1.1.4',
+56 silly addNameRange     '1.1.5',
+56 silly addNameRange     '1.1.6',
+56 silly addNameRange     '1.2.0',
+56 silly addNameRange     '1.2.1',
+56 silly addNameRange     '1.2.2',
+56 silly addNameRange     '1.2.3',
+56 silly addNameRange     '1.3.0',
+56 silly addNameRange     '1.4.0',
+56 silly addNameRange     '1.4.1',
+56 silly addNameRange     '1.4.2',
+56 silly addNameRange     '1.4.3',
+56 silly addNameRange     '1.4.4',
+56 silly addNameRange     '1.4.5',
+56 silly addNameRange     '1.4.6',
+56 silly addNameRange     '1.4.7',
+56 silly addNameRange     '1.4.8',
+56 silly addNameRange     '1.4.9',
+56 silly addNameRange     '1.5.0',
+56 silly addNameRange     '1.5.1',
+56 silly addNameRange     '1.5.2',
+56 silly addNameRange     '1.5.3',
+56 silly addNameRange     '1.5.4',
+56 silly addNameRange     '1.6.0',
+56 silly addNameRange     '1.6.1',
+56 silly addNameRange     '1.6.2',
+56 silly addNameRange     '1.6.3',
+56 silly addNameRange     '1.6.4',
+56 silly addNameRange     '1.6.5',
+56 silly addNameRange     '1.6.6',
+56 silly addNameRange     '1.6.7',
+56 silly addNameRange     '1.6.8',
+56 silly addNameRange     '1.6.9',
+56 silly addNameRange     '1.6.10',
+56 silly addNameRange     '1.6.11',
+56 silly addNameRange     '1.6.12',
+56 silly addNameRange     '1.6.13',
+56 silly addNameRange     '1.6.14',
+56 silly addNameRange     '1.6.15',
+56 silly addNameRange     '1.6.16',
+56 silly addNameRange     '1.6.17',
+56 silly addNameRange     '1.6.18',
+56 silly addNameRange     '1.6.19',
+56 silly addNameRange     '1.6.20',
+56 silly addNameRange     '1.6.21',
+56 silly addNameRange     '1.6.22',
+56 silly addNameRange     '1.6.23',
+56 silly addNameRange     '1.6.24',
+56 silly addNameRange     '1.6.25',
+56 silly addNameRange     '1.6.26',
+56 silly addNameRange     '1.6.27',
+56 silly addNameRange     '2.0.0-alpha.1',
+56 silly addNameRange     '2.0.0-alpha.2',
+56 silly addNameRange     '2.0.0',
+56 silly addNameRange     '2.2.0',
+56 silly addNameRange     '3.0.0',
+56 silly addNameRange     '3.0.2' ] ]
+57 silly addNamed topojson@3.0.2
+58 verbose addNamed "3.0.2" is a plain semver version for topojson
+59 silly cache afterAdd topojson@3.0.2
+60 verbose afterAdd /Users/fernandogelin/.npm/topojson/3.0.2/package/package.json not in flight; writing
+61 verbose afterAdd /Users/fernandogelin/.npm/topojson/3.0.2/package/package.json written
+62 silly install resolved [ { name: 'topojson',
+62 silly install resolved     version: '3.0.2',
+62 silly install resolved     description: 'An extension to GeoJSON that encodes topology.',
+62 silly install resolved     keywords: [ 'topojson', 'geojson' ],
+62 silly install resolved     homepage: 'https://github.com/topojson/topojson',
+62 silly install resolved     license: 'BSD-3-Clause',
+62 silly install resolved     author: { name: 'Mike Bostock', url: 'https://bost.ocks.org/mike' },
+62 silly install resolved     main: 'dist/topojson.node.js',
+62 silly install resolved     unpkg: 'dist/topojson.js',
+62 silly install resolved     jsdelivr: 'dist/topojson.js',
+62 silly install resolved     module: 'index',
+62 silly install resolved     'jsnext:main': 'index',
+62 silly install resolved     repository:
+62 silly install resolved      { type: 'git',
+62 silly install resolved        url: 'git+https://github.com/topojson/topojson.git' },
+62 silly install resolved     bin:
+62 silly install resolved      { geo2topo: 'node_modules/topojson-server/bin/geo2topo',
+62 silly install resolved        toposimplify: 'node_modules/topojson-simplify/bin/toposimplify',
+62 silly install resolved        topo2geo: 'node_modules/topojson-client/bin/topo2geo',
+62 silly install resolved        topomerge: 'node_modules/topojson-client/bin/topomerge',
+62 silly install resolved        topoquantize: 'node_modules/topojson-client/bin/topoquantize' },
+62 silly install resolved     scripts:
+62 silly install resolved      { pretest: 'rm -rf dist && mkdir dist && node rollup.node',
+62 silly install resolved        test: 'tape \'test/**/*-test.js\'',
+62 silly install resolved        prepublishOnly: 'npm run test && rollup -c --banner "$(preamble)" && uglifyjs -b beautify=false,preamble="\'$(preamble)\'" dist/topojson.js -c negate_iife=false -m -o dist/topojson.min.js',
+62 silly install resolved        postpublish: 'git push && git push --tags && cp -v README.md LICENSE.md dist/topojson.js dist/topojson.min.js ../topojson-bower && cd ../topojson-bower && git add README.md LICENSE.md topojson.js topojson.min.js && git commit -m "${npm_package_version}" && git tag -am "${npm_package_version}" v${npm_package_version} && git push && git push --tags && cd - && cp dist/topojson.js ../d3.github.com/topojson.v3.js && cp dist/topojson.min.js ../d3.github.com/topojson.v3.min.js && cd ../d3.github.com && git add topojson.v3.js topojson.v3.min.js && git commit -m "topojson ${npm_package_version}" && git push && cd - && zip -j dist/topojson.zip -- LICENSE.md README.md dist/topojson.js dist/topojson.min.js' },
+62 silly install resolved     devDependencies:
+62 silly install resolved      { 'package-preamble': '0.1',
+62 silly install resolved        rollup: '0.49',
+62 silly install resolved        'rollup-plugin-ascii': '0.0',
+62 silly install resolved        'rollup-plugin-node-resolve': '3',
+62 silly install resolved        tape: '4',
+62 silly install resolved        'uglify-js': '3' },
+62 silly install resolved     dependencies:
+62 silly install resolved      { 'topojson-client': '3.0.0',
+62 silly install resolved        'topojson-server': '3.0.0',
+62 silly install resolved        'topojson-simplify': '3.0.2' },
+62 silly install resolved     gitHead: 'e0a62d882a6b61aeaa4a533381f04377098df648',
+62 silly install resolved     bugs: { url: 'https://github.com/topojson/topojson/issues' },
+62 silly install resolved     _id: 'topojson@3.0.2',
+62 silly install resolved     _npmVersion: '5.3.0',
+62 silly install resolved     _nodeVersion: '8.4.0',
+62 silly install resolved     _npmUser: { name: 'mbostock', email: 'mike@ocks.org' },
+62 silly install resolved     dist:
+62 silly install resolved      { integrity: 'sha512-u3zeuL6WEVL0dmsRn7uHZKc4Ao4gpW3sORUv+N3ezLTvY3JdCuyg0hvpWiIfFw8p/JwVN++SvAsFgcFEeR15rQ==',
+62 silly install resolved        shasum: 'fcb927306c3e0fa76656fa58deed4555d2346fb4',
+62 silly install resolved        tarball: 'https://registry.npmjs.org/topojson/-/topojson-3.0.2.tgz' },
+62 silly install resolved     maintainers: [ [Object], [Object] ],
+62 silly install resolved     _npmOperationalInternal:
+62 silly install resolved      { host: 's3://npm-registry-packages',
+62 silly install resolved        tmp: 'tmp/topojson-3.0.2.tgz_1504390965922_0.9841638875659555' },
+62 silly install resolved     directories: {},
+62 silly install resolved     _shasum: 'fcb927306c3e0fa76656fa58deed4555d2346fb4',
+62 silly install resolved     _resolved: 'https://registry.npmjs.org/topojson/-/topojson-3.0.2.tgz',
+62 silly install resolved     _from: 'topojson@>=3.0.2 <4.0.0',
+62 silly install resolved     readme: 'ERROR: No README data found!' } ]
+63 info install topojson@3.0.2 into /Users/fernandogelin/Documents/map-viz
+64 info installOne topojson@3.0.2
+65 verbose installOne of topojson to /Users/fernandogelin/Documents/map-viz not in flight; installing
+66 verbose lock using /Users/fernandogelin/.npm/_locks/topojson-6df8f05877a32102.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+67 silly install write writing topojson 3.0.2 to /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+68 verbose unbuild node_modules/topojson
+69 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson is being purged from base /Users/fernandogelin/Documents/map-viz
+70 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+71 verbose tar unpack /Users/fernandogelin/.npm/topojson/3.0.2/package.tgz
+72 verbose tar unpacking to /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+73 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson is being purged
+74 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+75 silly gunzTarPerm modes [ '755', '644' ]
+76 silly gunzTarPerm extractEntry package.json
+77 silly gunzTarPerm extractEntry .npmignore
+78 silly gunzTarPerm extractEntry README.md
+79 silly gunzTarPerm extractEntry index.js
+80 silly gunzTarPerm extractEntry rollup.config.js
+81 silly gunzTarPerm extractEntry rollup.node.js
+82 silly gunzTarPerm extractEntry dist/topojson.js
+83 silly gunzTarPerm extractEntry dist/topojson.min.js
+84 silly gunzTarPerm extractEntry dist/topojson.node.js
+85 silly gunzTarPerm extractEntry LICENSE.md
+86 verbose write writing to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/package.json
+87 info preinstall topojson@3.0.2
+88 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/package.json
+89 silly prepareForInstallMany adding topojson-server@3.0.0 from topojson dependencies
+90 silly prepareForInstallMany adding topojson-simplify@3.0.2 from topojson dependencies
+91 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/package.json
+92 silly cache add args [ 'topojson-server@3.0.0', null ]
+93 verbose cache add spec topojson-server@3.0.0
+94 silly cache add args [ 'topojson-simplify@3.0.2', null ]
+95 verbose cache add spec topojson-simplify@3.0.2
+96 silly cache add parsed spec Result {
+96 silly cache add   raw: 'topojson-server@3.0.0',
+96 silly cache add   scope: null,
+96 silly cache add   name: 'topojson-server',
+96 silly cache add   rawSpec: '3.0.0',
+96 silly cache add   spec: '3.0.0',
+96 silly cache add   type: 'version' }
+97 silly addNamed topojson-server@3.0.0
+98 verbose addNamed "3.0.0" is a plain semver version for topojson-server
+99 silly mapToRegistry name topojson-server
+100 silly mapToRegistry using default registry
+101 silly mapToRegistry registry https://registry.npmjs.org/
+102 silly mapToRegistry uri https://registry.npmjs.org/topojson-server
+103 verbose addNameVersion registry:https://registry.npmjs.org/topojson-server not in flight; fetching
+104 silly cache add parsed spec Result {
+104 silly cache add   raw: 'topojson-simplify@3.0.2',
+104 silly cache add   scope: null,
+104 silly cache add   name: 'topojson-simplify',
+104 silly cache add   rawSpec: '3.0.2',
+104 silly cache add   spec: '3.0.2',
+104 silly cache add   type: 'version' }
+105 silly addNamed topojson-simplify@3.0.2
+106 verbose addNamed "3.0.2" is a plain semver version for topojson-simplify
+107 silly mapToRegistry name topojson-simplify
+108 silly mapToRegistry using default registry
+109 silly mapToRegistry registry https://registry.npmjs.org/
+110 silly mapToRegistry uri https://registry.npmjs.org/topojson-simplify
+111 verbose addNameVersion registry:https://registry.npmjs.org/topojson-simplify not in flight; fetching
+112 verbose request uri https://registry.npmjs.org/topojson-server
+113 verbose request no auth needed
+114 info attempt registry request try #1 at 12:34:43 PM
+115 verbose etag "58dde5e1-260d"
+116 verbose lastModified Fri, 31 Mar 2017 5:15:13 GMT
+117 http request GET https://registry.npmjs.org/topojson-server
+118 verbose request uri https://registry.npmjs.org/topojson-simplify
+119 verbose request no auth needed
+120 info attempt registry request try #1 at 12:34:43 PM
+121 verbose etag "597fbabb-5bad"
+122 verbose lastModified Mon, 31 Jul 2017 23:18:19 GMT
+123 http request GET https://registry.npmjs.org/topojson-simplify
+124 http 304 https://registry.npmjs.org/topojson-server
+125 verbose headers { date: 'Wed, 21 Mar 2018 16:34:43 GMT',
+125 verbose headers   via: '1.1 varnish',
+125 verbose headers   'cache-control': 'max-age=300',
+125 verbose headers   etag: '"58dde5e1-260d"',
+125 verbose headers   age: '189',
+125 verbose headers   connection: 'keep-alive',
+125 verbose headers   'x-served-by': 'cache-bos8225-BOS',
+125 verbose headers   'x-cache': 'HIT',
+125 verbose headers   'x-cache-hits': '1',
+125 verbose headers   'x-timer': 'S1521650084.614843,VS0,VE0',
+125 verbose headers   vary: 'Accept-Encoding, Accept' }
+126 silly get cb [ 304,
+126 silly get   { date: 'Wed, 21 Mar 2018 16:34:43 GMT',
+126 silly get     via: '1.1 varnish',
+126 silly get     'cache-control': 'max-age=300',
+126 silly get     etag: '"58dde5e1-260d"',
+126 silly get     age: '189',
+126 silly get     connection: 'keep-alive',
+126 silly get     'x-served-by': 'cache-bos8225-BOS',
+126 silly get     'x-cache': 'HIT',
+126 silly get     'x-cache-hits': '1',
+126 silly get     'x-timer': 'S1521650084.614843,VS0,VE0',
+126 silly get     vary: 'Accept-Encoding, Accept' } ]
+127 verbose etag https://registry.npmjs.org/topojson-server from cache
+128 verbose get saving topojson-server to /Users/fernandogelin/.npm/registry.npmjs.org/topojson-server/.cache.json
+129 http 304 https://registry.npmjs.org/topojson-simplify
+130 verbose headers { date: 'Wed, 21 Mar 2018 16:34:43 GMT',
+130 verbose headers   via: '1.1 varnish',
+130 verbose headers   'cache-control': 'max-age=300',
+130 verbose headers   etag: '"597fbabb-5bad"',
+130 verbose headers   age: '189',
+130 verbose headers   connection: 'keep-alive',
+130 verbose headers   'x-served-by': 'cache-bos8233-BOS',
+130 verbose headers   'x-cache': 'HIT',
+130 verbose headers   'x-cache-hits': '1',
+130 verbose headers   'x-timer': 'S1521650084.620236,VS0,VE0',
+130 verbose headers   vary: 'Accept-Encoding, Accept' }
+131 silly get cb [ 304,
+131 silly get   { date: 'Wed, 21 Mar 2018 16:34:43 GMT',
+131 silly get     via: '1.1 varnish',
+131 silly get     'cache-control': 'max-age=300',
+131 silly get     etag: '"597fbabb-5bad"',
+131 silly get     age: '189',
+131 silly get     connection: 'keep-alive',
+131 silly get     'x-served-by': 'cache-bos8233-BOS',
+131 silly get     'x-cache': 'HIT',
+131 silly get     'x-cache-hits': '1',
+131 silly get     'x-timer': 'S1521650084.620236,VS0,VE0',
+131 silly get     vary: 'Accept-Encoding, Accept' } ]
+132 verbose etag https://registry.npmjs.org/topojson-simplify from cache
+133 verbose get saving topojson-simplify to /Users/fernandogelin/.npm/registry.npmjs.org/topojson-simplify/.cache.json
+134 silly cache afterAdd topojson-server@3.0.0
+135 verbose afterAdd /Users/fernandogelin/.npm/topojson-server/3.0.0/package/package.json not in flight; writing
+136 silly cache afterAdd topojson-simplify@3.0.2
+137 verbose afterAdd /Users/fernandogelin/.npm/topojson-simplify/3.0.2/package/package.json not in flight; writing
+138 verbose afterAdd /Users/fernandogelin/.npm/topojson-server/3.0.0/package/package.json written
+139 verbose afterAdd /Users/fernandogelin/.npm/topojson-simplify/3.0.2/package/package.json written
+140 silly install resolved [ { name: 'topojson-server',
+140 silly install resolved     version: '3.0.0',
+140 silly install resolved     description: 'Convert GeoJSON to TopoJSON for smaller files and the power of topology!',
+140 silly install resolved     keywords: [ 'topojson', 'geojson' ],
+140 silly install resolved     homepage: 'https://github.com/topojson/topojson-server',
+140 silly install resolved     license: 'BSD-3-Clause',
+140 silly install resolved     author: { name: 'Mike Bostock', url: 'https://bost.ocks.org/mike' },
+140 silly install resolved     main: 'dist/topojson-server.js',
+140 silly install resolved     module: 'index',
+140 silly install resolved     repository:
+140 silly install resolved      { type: 'git',
+140 silly install resolved        url: 'git+https://github.com/topojson/topojson-server.git' },
+140 silly install resolved     bin: { geo2topo: 'bin/geo2topo' },
+140 silly install resolved     scripts:
+140 silly install resolved      { pretest: 'rm -rf dist && mkdir dist && rollup --banner "$(preamble)" -f umd -n topojson -o dist/topojson-server.js -- index.js && rollup -f cjs -o build/topojson-internals.js -- test/internals.js',
+140 silly install resolved        test: 'tape \'test/**/*-test.js\' && eslint index.js src',
+140 silly install resolved        prepublish: 'npm run test && uglifyjs --preamble "$(preamble)" -cm -o dist/topojson-server.min.js -- dist/topojson-server.js',
+140 silly install resolved        postpublish: 'git push && git push --tags && zip -j dist/topojson-server.zip -- LICENSE.md README.md dist/topojson-server.js dist/topojson-server.min.js' },
+140 silly install resolved     dependencies: { commander: '2' },
+140 silly install resolved     devDependencies:
+140 silly install resolved      { eslint: '3',
+140 silly install resolved        'package-preamble': '0.0',
+140 silly install resolved        rollup: '0.41',
+140 silly install resolved        tape: '4',
+140 silly install resolved        'topojson-client': '3',
+140 silly install resolved        'uglify-js': '2' },
+140 silly install resolved     gitHead: '901ec6012a7ee6a36c86926e8d0b1d9a3d203d46',
+140 silly install resolved     bugs: { url: 'https://github.com/topojson/topojson-server/issues' },
+140 silly install resolved     _id: 'topojson-server@3.0.0',
+140 silly install resolved     _shasum: '378e78e87c3972a7b5be2c5d604369b6bae69c5e',
+140 silly install resolved     _from: 'topojson-server@3.0.0',
+140 silly install resolved     _npmVersion: '3.10.10',
+140 silly install resolved     _nodeVersion: '7.3.0',
+140 silly install resolved     _npmUser: { name: 'mbostock', email: 'mike@ocks.org' },
+140 silly install resolved     dist:
+140 silly install resolved      { shasum: '378e78e87c3972a7b5be2c5d604369b6bae69c5e',
+140 silly install resolved        tarball: 'https://registry.npmjs.org/topojson-server/-/topojson-server-3.0.0.tgz' },
+140 silly install resolved     maintainers: [ [Object] ],
+140 silly install resolved     _npmOperationalInternal:
+140 silly install resolved      { host: 'packages-18-east.internal.npmjs.com',
+140 silly install resolved        tmp: 'tmp/topojson-server-3.0.0.tgz_1490937311653_0.6286520296707749' },
+140 silly install resolved     directories: {},
+140 silly install resolved     _resolved: 'https://registry.npmjs.org/topojson-server/-/topojson-server-3.0.0.tgz',
+140 silly install resolved     readme: 'ERROR: No README data found!' },
+140 silly install resolved   { name: 'topojson-simplify',
+140 silly install resolved     version: '3.0.2',
+140 silly install resolved     description: 'Topology-preserving simplification and filtering for TopoJSON.',
+140 silly install resolved     keywords: [ 'topojson', 'geojson', 'simplification' ],
+140 silly install resolved     homepage: 'https://github.com/topojson/topojson-simplify',
+140 silly install resolved     license: 'BSD-3-Clause',
+140 silly install resolved     author: { name: 'Mike Bostock', url: 'https://bost.ocks.org/mike' },
+140 silly install resolved     main: 'dist/topojson-simplify.js',
+140 silly install resolved     module: 'index',
+140 silly install resolved     repository:
+140 silly install resolved      { type: 'git',
+140 silly install resolved        url: 'git+https://github.com/topojson/topojson-simplify.git' },
+140 silly install resolved     bin: { toposimplify: 'bin/toposimplify' },
+140 silly install resolved     scripts:
+140 silly install resolved      { pretest: 'rm -rf dist && mkdir dist && rollup --banner "$(preamble)" -g topojson-client:topojson -f umd -n topojson -o dist/topojson-simplify.js -- index.js',
+140 silly install resolved        test: 'tape \'test/**/*-test.js\' && eslint index.js src',
+140 silly install resolved        prepublish: 'npm run test && uglifyjs --preamble "$(preamble)" -cm -o dist/topojson-simplify.min.js -- dist/topojson-simplify.js',
+140 silly install resolved        postpublish: 'git push && git push --tags && zip -j dist/topojson-simplify.zip -- LICENSE.md README.md dist/topojson-simplify.js dist/topojson-simplify.min.js' },
+140 silly install resolved     dependencies: { commander: '2', 'topojson-client': '3' },
+140 silly install resolved     devDependencies:
+140 silly install resolved      { eslint: '3',
+140 silly install resolved        'package-preamble': '0.0',
+140 silly install resolved        rollup: '0.41',
+140 silly install resolved        tape: '4',
+140 silly install resolved        'uglify-js': '2' },
+140 silly install resolved     gitHead: 'cf7d99bb2fba1806ee380688a40a51d5080be885',
+140 silly install resolved     bugs: { url: 'https://github.com/topojson/topojson-simplify/issues' },
+140 silly install resolved     _id: 'topojson-simplify@3.0.2',
+140 silly install resolved     _npmVersion: '5.3.0',
+140 silly install resolved     _nodeVersion: '8.2.1',
+140 silly install resolved     _npmUser: { name: 'mbostock', email: 'mike@ocks.org' },
+140 silly install resolved     dist:
+140 silly install resolved      { integrity: 'sha512-gyYSVRt4jO/0RJXKZQPzTDQRWV+D/nOfiljNUv0HBXslFLtq3yxRHrl7jbrjdbda5Ytdr7M8BZUI4OxU7tnbRQ==',
+140 silly install resolved        shasum: '8a2403e639531500fafa0c6594e8b0fadebc2c02',
+140 silly install resolved        tarball: 'https://registry.npmjs.org/topojson-simplify/-/topojson-simplify-3.0.2.tgz' },
+140 silly install resolved     maintainers: [ [Object] ],
+140 silly install resolved     _npmOperationalInternal:
+140 silly install resolved      { host: 's3://npm-registry-packages',
+140 silly install resolved        tmp: 'tmp/topojson-simplify-3.0.2.tgz_1501543099309_0.5955245280638337' },
+140 silly install resolved     directories: {},
+140 silly install resolved     _shasum: '8a2403e639531500fafa0c6594e8b0fadebc2c02',
+140 silly install resolved     _resolved: 'https://registry.npmjs.org/topojson-simplify/-/topojson-simplify-3.0.2.tgz',
+140 silly install resolved     _from: 'topojson-simplify@3.0.2',
+140 silly install resolved     readme: 'ERROR: No README data found!' } ]
+141 info install topojson-server@3.0.0 into /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+142 info install topojson-simplify@3.0.2 into /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+143 info installOne topojson-server@3.0.0
+144 verbose installOne of topojson-server to /Users/fernandogelin/Documents/map-viz/node_modules/topojson not in flight; installing
+145 info installOne topojson-simplify@3.0.2
+146 verbose installOne of topojson-simplify to /Users/fernandogelin/Documents/map-viz/node_modules/topojson not in flight; installing
+147 verbose lock using /Users/fernandogelin/.npm/_locks/topojson-server-58d3180281037bd0.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server
+148 verbose lock using /Users/fernandogelin/.npm/_locks/topojson-simplify-6a184980f11cf0cf.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify
+149 silly install write writing topojson-server 3.0.0 to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server
+150 silly install write writing topojson-simplify 3.0.2 to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify
+151 verbose unbuild node_modules/topojson/node_modules/topojson-server
+152 verbose unbuild node_modules/topojson/node_modules/topojson-simplify
+153 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server is being purged from base /Users/fernandogelin/Documents/map-viz
+154 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server
+155 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify is being purged from base /Users/fernandogelin/Documents/map-viz
+156 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify
+157 verbose tar unpack /Users/fernandogelin/.npm/topojson-server/3.0.0/package.tgz
+158 verbose tar unpacking to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server
+159 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server is being purged
+160 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server
+161 verbose tar unpack /Users/fernandogelin/.npm/topojson-simplify/3.0.2/package.tgz
+162 verbose tar unpacking to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify
+163 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify is being purged
+164 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify
+165 silly gunzTarPerm modes [ '755', '644' ]
+166 silly gunzTarPerm modes [ '755', '644' ]
+167 silly gunzTarPerm extractEntry package.json
+168 silly gunzTarPerm extractEntry package.json
+169 silly gunzTarPerm extractEntry .npmignore
+170 silly gunzTarPerm extractEntry README.md
+171 silly gunzTarPerm extractEntry .npmignore
+172 silly gunzTarPerm extractEntry README.md
+173 silly gunzTarPerm extractEntry index.js
+174 silly gunzTarPerm extractEntry dist/topojson-server.js
+175 silly gunzTarPerm extractEntry index.js
+176 silly gunzTarPerm extractEntry dist/topojson-server.min.js
+177 silly gunzTarPerm extractEntry .eslintrc
+178 silly gunzTarPerm extractEntry bin/toposimplify
+179 silly gunzTarPerm extractEntry dist/topojson-simplify.js
+180 silly gunzTarPerm extractEntry dist/topojson-simplify.min.js
+181 silly gunzTarPerm extractEntry bin/geo2topo
+182 silly gunzTarPerm extractEntry LICENSE.md
+183 silly gunzTarPerm extractEntry LICENSE.md
+184 silly gunzTarPerm extractEntry src/filter.js
+185 silly gunzTarPerm extractEntry .eslintrc
+186 silly gunzTarPerm extractEntry src/bounds.js
+187 silly gunzTarPerm extractEntry src/cut.js
+188 silly gunzTarPerm extractEntry src/dedup.js
+189 silly gunzTarPerm extractEntry src/filterAttachedWeight.js
+190 silly gunzTarPerm extractEntry src/filterWeight.js
+191 silly gunzTarPerm extractEntry src/delta.js
+192 silly gunzTarPerm extractEntry src/extract.js
+193 silly gunzTarPerm extractEntry src/heap.js
+194 silly gunzTarPerm extractEntry src/filterAttached.js
+195 silly gunzTarPerm extractEntry src/geometry.js
+196 silly gunzTarPerm extractEntry src/join.js
+197 silly gunzTarPerm extractEntry src/presimplify.js
+198 silly gunzTarPerm extractEntry src/prune.js
+199 silly gunzTarPerm extractEntry src/prequantize.js
+200 silly gunzTarPerm extractEntry src/topology.js
+201 silly gunzTarPerm extractEntry src/quantile.js
+202 silly gunzTarPerm extractEntry src/simplify.js
+203 silly gunzTarPerm extractEntry src/hash/hashmap.js
+204 silly gunzTarPerm extractEntry src/hash/hashset.js
+205 silly gunzTarPerm extractEntry src/spherical.js
+206 silly gunzTarPerm extractEntry src/planar.js
+207 silly gunzTarPerm extractEntry src/hash/point-equal.js
+208 silly gunzTarPerm extractEntry src/hash/point-hash.js
+209 verbose write writing to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/package.json
+210 info preinstall topojson-simplify@3.0.2
+211 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/package.json
+212 silly prepareForInstallMany adding commander@2 from topojson-simplify dependencies
+213 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/package.json
+214 silly cache add args [ 'commander@2', null ]
+215 verbose cache add spec commander@2
+216 silly cache add parsed spec Result {
+216 silly cache add   raw: 'commander@2',
+216 silly cache add   scope: null,
+216 silly cache add   name: 'commander',
+216 silly cache add   rawSpec: '2',
+216 silly cache add   spec: '>=2.0.0 <3.0.0',
+216 silly cache add   type: 'range' }
+217 silly addNamed commander@>=2.0.0 <3.0.0
+218 verbose addNamed ">=2.0.0 <3.0.0" is a valid semver range for commander
+219 silly addNameRange { name: 'commander', range: '>=2.0.0 <3.0.0', hasData: false }
+220 silly mapToRegistry name commander
+221 silly mapToRegistry using default registry
+222 silly mapToRegistry registry https://registry.npmjs.org/
+223 silly mapToRegistry uri https://registry.npmjs.org/commander
+224 verbose addNameRange registry:https://registry.npmjs.org/commander not in flight; fetching
+225 verbose get https://registry.npmjs.org/commander not expired, no request
+226 silly addNameRange number 2 { name: 'commander', range: '>=2.0.0 <3.0.0', hasData: true }
+227 silly addNameRange versions [ 'commander',
+227 silly addNameRange   [ '0.0.1',
+227 silly addNameRange     '0.0.3',
+227 silly addNameRange     '0.0.4',
+227 silly addNameRange     '0.0.5',
+227 silly addNameRange     '0.1.0',
+227 silly addNameRange     '0.2.0',
+227 silly addNameRange     '0.2.1',
+227 silly addNameRange     '0.3.0',
+227 silly addNameRange     '0.3.1',
+227 silly addNameRange     '0.3.2',
+227 silly addNameRange     '0.3.3',
+227 silly addNameRange     '0.4.0',
+227 silly addNameRange     '0.4.1',
+227 silly addNameRange     '0.4.2',
+227 silly addNameRange     '0.4.3',
+227 silly addNameRange     '0.5.0',
+227 silly addNameRange     '0.5.1',
+227 silly addNameRange     '0.6.0',
+227 silly addNameRange     '0.6.1',
+227 silly addNameRange     '0.5.2',
+227 silly addNameRange     '1.0.0',
+227 silly addNameRange     '1.0.1',
+227 silly addNameRange     '1.0.2',
+227 silly addNameRange     '1.0.3',
+227 silly addNameRange     '1.0.4',
+227 silly addNameRange     '1.0.5',
+227 silly addNameRange     '1.1.0',
+227 silly addNameRange     '1.1.1',
+227 silly addNameRange     '1.2.0',
+227 silly addNameRange     '1.3.0',
+227 silly addNameRange     '1.3.1',
+227 silly addNameRange     '1.3.2',
+227 silly addNameRange     '2.0.0',
+227 silly addNameRange     '2.1.0',
+227 silly addNameRange     '2.2.0',
+227 silly addNameRange     '2.3.0',
+227 silly addNameRange     '2.4.0',
+227 silly addNameRange     '2.5.0',
+227 silly addNameRange     '2.5.1',
+227 silly addNameRange     '2.6.0',
+227 silly addNameRange     '2.7.0',
+227 silly addNameRange     '2.7.1',
+227 silly addNameRange     '2.8.0',
+227 silly addNameRange     '2.8.1',
+227 silly addNameRange     '2.9.0',
+227 silly addNameRange     '2.10.0',
+227 silly addNameRange     '2.11.0',
+227 silly addNameRange     '2.12.0',
+227 silly addNameRange     '2.12.1',
+227 silly addNameRange     '2.12.2',
+227 silly addNameRange     '2.13.0',
+227 silly addNameRange     '2.14.0',
+227 silly addNameRange     '2.14.1',
+227 silly addNameRange     '2.15.0',
+227 silly addNameRange     '2.15.1' ] ]
+228 silly addNamed commander@2.15.1
+229 verbose addNamed "2.15.1" is a plain semver version for commander
+230 silly cache afterAdd commander@2.15.1
+231 verbose afterAdd /Users/fernandogelin/.npm/commander/2.15.1/package/package.json not in flight; writing
+232 verbose write writing to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/package.json
+233 verbose afterAdd /Users/fernandogelin/.npm/commander/2.15.1/package/package.json written
+234 silly install resolved [ { name: 'commander',
+234 silly install resolved     version: '2.15.1',
+234 silly install resolved     description: 'the complete solution for node.js command-line programs',
+234 silly install resolved     keywords: [ 'commander', 'command', 'option', 'parser' ],
+234 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+234 silly install resolved     license: 'MIT',
+234 silly install resolved     repository:
+234 silly install resolved      { type: 'git',
+234 silly install resolved        url: 'git+https://github.com/tj/commander.js.git' },
+234 silly install resolved     scripts:
+234 silly install resolved      { lint: 'eslint index.js',
+234 silly install resolved        test: 'make test && npm run test-typings',
+234 silly install resolved        'test-typings': 'node_modules/typescript/bin/tsc -p tsconfig.json' },
+234 silly install resolved     main: 'index',
+234 silly install resolved     files: [ 'index.js', 'typings/index.d.ts' ],
+234 silly install resolved     dependencies: {},
+234 silly install resolved     devDependencies:
+234 silly install resolved      { '@types/node': '^7.0.55',
+234 silly install resolved        eslint: '^3.19.0',
+234 silly install resolved        should: '^11.2.1',
+234 silly install resolved        sinon: '^2.4.1',
+234 silly install resolved        standard: '^10.0.3',
+234 silly install resolved        typescript: '^2.7.2' },
+234 silly install resolved     typings: 'typings/index.d.ts',
+234 silly install resolved     gitHead: '649eaef336ddc7224eb5c73e4a958685e24de25e',
+234 silly install resolved     bugs: { url: 'https://github.com/tj/commander.js/issues' },
+234 silly install resolved     homepage: 'https://github.com/tj/commander.js#readme',
+234 silly install resolved     _id: 'commander@2.15.1',
+234 silly install resolved     _npmVersion: '5.6.0',
+234 silly install resolved     _nodeVersion: '9.8.0',
+234 silly install resolved     _npmUser: { name: 'abetomo', email: 'abe@enzou.tokyo' },
+234 silly install resolved     dist:
+234 silly install resolved      { integrity: 'sha512-VlfT9F3V0v+jr4yxPc5gg9s62/fIVWsd2Bk2iD435um1NlGMYdVCq+MjcXnhYq2icNOizHr1kK+5TI6H0Hy0ag==',
+234 silly install resolved        shasum: 'df46e867d0fc2aec66a34662b406a9ccafff5b0f',
+234 silly install resolved        tarball: 'https://registry.npmjs.org/commander/-/commander-2.15.1.tgz',
+234 silly install resolved        fileCount: 6,
+234 silly install resolved        unpackedSize: 59781 },
+234 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object], [Object] ],
+234 silly install resolved     directories: {},
+234 silly install resolved     _npmOperationalInternal:
+234 silly install resolved      { host: 's3://npm-registry-packages',
+234 silly install resolved        tmp: 'tmp/commander_2.15.1_1521510442790_0.20361588610282877' },
+234 silly install resolved     _shasum: 'df46e867d0fc2aec66a34662b406a9ccafff5b0f',
+234 silly install resolved     _resolved: 'https://registry.npmjs.org/commander/-/commander-2.15.1.tgz',
+234 silly install resolved     _from: 'commander@>=2.0.0 <3.0.0',
+234 silly install resolved     readme: 'ERROR: No README data found!' } ]
+235 info install commander@2.15.1 into /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify
+236 info installOne commander@2.15.1
+237 verbose installOne of commander to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify not in flight; installing
+238 info preinstall topojson-server@3.0.0
+239 verbose lock using /Users/fernandogelin/.npm/_locks/commander-47dc31f440c274ec.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander
+240 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/package.json
+241 silly install write writing commander 2.15.1 to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander
+242 verbose unbuild node_modules/topojson/node_modules/topojson-simplify/node_modules/commander
+243 silly prepareForInstallMany adding commander@2 from topojson-server dependencies
+244 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/package.json
+245 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander is being purged from base /Users/fernandogelin/Documents/map-viz
+246 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander
+247 verbose tar unpack /Users/fernandogelin/.npm/commander/2.15.1/package.tgz
+248 verbose tar unpacking to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander
+249 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander is being purged
+250 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander
+251 silly gunzTarPerm modes [ '755', '644' ]
+252 silly gunzTarPerm extractEntry package.json
+253 silly cache add args [ 'commander@2', null ]
+254 verbose cache add spec commander@2
+255 silly cache add parsed spec Result {
+255 silly cache add   raw: 'commander@2',
+255 silly cache add   scope: null,
+255 silly cache add   name: 'commander',
+255 silly cache add   rawSpec: '2',
+255 silly cache add   spec: '>=2.0.0 <3.0.0',
+255 silly cache add   type: 'range' }
+256 silly addNamed commander@>=2.0.0 <3.0.0
+257 verbose addNamed ">=2.0.0 <3.0.0" is a valid semver range for commander
+258 silly addNameRange { name: 'commander', range: '>=2.0.0 <3.0.0', hasData: false }
+259 silly mapToRegistry name commander
+260 silly mapToRegistry using default registry
+261 silly mapToRegistry registry https://registry.npmjs.org/
+262 silly mapToRegistry uri https://registry.npmjs.org/commander
+263 verbose addNameRange registry:https://registry.npmjs.org/commander not in flight; fetching
+264 verbose get https://registry.npmjs.org/commander not expired, no request
+265 silly addNameRange number 2 { name: 'commander', range: '>=2.0.0 <3.0.0', hasData: true }
+266 silly addNameRange versions [ 'commander',
+266 silly addNameRange   [ '0.0.1',
+266 silly addNameRange     '0.0.3',
+266 silly addNameRange     '0.0.4',
+266 silly addNameRange     '0.0.5',
+266 silly addNameRange     '0.1.0',
+266 silly addNameRange     '0.2.0',
+266 silly addNameRange     '0.2.1',
+266 silly addNameRange     '0.3.0',
+266 silly addNameRange     '0.3.1',
+266 silly addNameRange     '0.3.2',
+266 silly addNameRange     '0.3.3',
+266 silly addNameRange     '0.4.0',
+266 silly addNameRange     '0.4.1',
+266 silly addNameRange     '0.4.2',
+266 silly addNameRange     '0.4.3',
+266 silly addNameRange     '0.5.0',
+266 silly addNameRange     '0.5.1',
+266 silly addNameRange     '0.6.0',
+266 silly addNameRange     '0.6.1',
+266 silly addNameRange     '0.5.2',
+266 silly addNameRange     '1.0.0',
+266 silly addNameRange     '1.0.1',
+266 silly addNameRange     '1.0.2',
+266 silly addNameRange     '1.0.3',
+266 silly addNameRange     '1.0.4',
+266 silly addNameRange     '1.0.5',
+266 silly addNameRange     '1.1.0',
+266 silly addNameRange     '1.1.1',
+266 silly addNameRange     '1.2.0',
+266 silly addNameRange     '1.3.0',
+266 silly addNameRange     '1.3.1',
+266 silly addNameRange     '1.3.2',
+266 silly addNameRange     '2.0.0',
+266 silly addNameRange     '2.1.0',
+266 silly addNameRange     '2.2.0',
+266 silly addNameRange     '2.3.0',
+266 silly addNameRange     '2.4.0',
+266 silly addNameRange     '2.5.0',
+266 silly addNameRange     '2.5.1',
+266 silly addNameRange     '2.6.0',
+266 silly addNameRange     '2.7.0',
+266 silly addNameRange     '2.7.1',
+266 silly addNameRange     '2.8.0',
+266 silly addNameRange     '2.8.1',
+266 silly addNameRange     '2.9.0',
+266 silly addNameRange     '2.10.0',
+266 silly addNameRange     '2.11.0',
+266 silly addNameRange     '2.12.0',
+266 silly addNameRange     '2.12.1',
+266 silly addNameRange     '2.12.2',
+266 silly addNameRange     '2.13.0',
+266 silly addNameRange     '2.14.0',
+266 silly addNameRange     '2.14.1',
+266 silly addNameRange     '2.15.0',
+266 silly addNameRange     '2.15.1' ] ]
+267 silly addNamed commander@2.15.1
+268 verbose addNamed "2.15.1" is a plain semver version for commander
+269 silly gunzTarPerm extractEntry CHANGELOG.md
+270 silly gunzTarPerm extractEntry index.js
+271 silly cache afterAdd commander@2.15.1
+272 verbose afterAdd /Users/fernandogelin/.npm/commander/2.15.1/package/package.json not in flight; writing
+273 silly gunzTarPerm extractEntry LICENSE
+274 verbose afterAdd /Users/fernandogelin/.npm/commander/2.15.1/package/package.json written
+275 silly install resolved [ { name: 'commander',
+275 silly install resolved     version: '2.15.1',
+275 silly install resolved     description: 'the complete solution for node.js command-line programs',
+275 silly install resolved     keywords: [ 'commander', 'command', 'option', 'parser' ],
+275 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+275 silly install resolved     license: 'MIT',
+275 silly install resolved     repository:
+275 silly install resolved      { type: 'git',
+275 silly install resolved        url: 'git+https://github.com/tj/commander.js.git' },
+275 silly install resolved     scripts:
+275 silly install resolved      { lint: 'eslint index.js',
+275 silly install resolved        test: 'make test && npm run test-typings',
+275 silly install resolved        'test-typings': 'node_modules/typescript/bin/tsc -p tsconfig.json' },
+275 silly install resolved     main: 'index',
+275 silly install resolved     files: [ 'index.js', 'typings/index.d.ts' ],
+275 silly install resolved     dependencies: {},
+275 silly install resolved     devDependencies:
+275 silly install resolved      { '@types/node': '^7.0.55',
+275 silly install resolved        eslint: '^3.19.0',
+275 silly install resolved        should: '^11.2.1',
+275 silly install resolved        sinon: '^2.4.1',
+275 silly install resolved        standard: '^10.0.3',
+275 silly install resolved        typescript: '^2.7.2' },
+275 silly install resolved     typings: 'typings/index.d.ts',
+275 silly install resolved     gitHead: '649eaef336ddc7224eb5c73e4a958685e24de25e',
+275 silly install resolved     bugs: { url: 'https://github.com/tj/commander.js/issues' },
+275 silly install resolved     homepage: 'https://github.com/tj/commander.js#readme',
+275 silly install resolved     _id: 'commander@2.15.1',
+275 silly install resolved     _npmVersion: '5.6.0',
+275 silly install resolved     _nodeVersion: '9.8.0',
+275 silly install resolved     _npmUser: { name: 'abetomo', email: 'abe@enzou.tokyo' },
+275 silly install resolved     dist:
+275 silly install resolved      { integrity: 'sha512-VlfT9F3V0v+jr4yxPc5gg9s62/fIVWsd2Bk2iD435um1NlGMYdVCq+MjcXnhYq2icNOizHr1kK+5TI6H0Hy0ag==',
+275 silly install resolved        shasum: 'df46e867d0fc2aec66a34662b406a9ccafff5b0f',
+275 silly install resolved        tarball: 'https://registry.npmjs.org/commander/-/commander-2.15.1.tgz',
+275 silly install resolved        fileCount: 6,
+275 silly install resolved        unpackedSize: 59781 },
+275 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object], [Object] ],
+275 silly install resolved     directories: {},
+275 silly install resolved     _npmOperationalInternal:
+275 silly install resolved      { host: 's3://npm-registry-packages',
+275 silly install resolved        tmp: 'tmp/commander_2.15.1_1521510442790_0.20361588610282877' },
+275 silly install resolved     _shasum: 'df46e867d0fc2aec66a34662b406a9ccafff5b0f',
+275 silly install resolved     _resolved: 'https://registry.npmjs.org/commander/-/commander-2.15.1.tgz',
+275 silly install resolved     _from: 'commander@>=2.0.0 <3.0.0',
+275 silly install resolved     readme: 'ERROR: No README data found!' } ]
+276 info install commander@2.15.1 into /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server
+277 info installOne commander@2.15.1
+278 verbose installOne of commander to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server not in flight; installing
+279 verbose lock using /Users/fernandogelin/.npm/_locks/commander-9446a97a3d5d964e.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander
+280 silly install write writing commander 2.15.1 to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander
+281 verbose unbuild node_modules/topojson/node_modules/topojson-server/node_modules/commander
+282 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander is being purged from base /Users/fernandogelin/Documents/map-viz
+283 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander
+284 silly gunzTarPerm extractEntry Readme.md
+285 silly gunzTarPerm extractEntry typings/index.d.ts
+286 verbose tar unpack /Users/fernandogelin/.npm/commander/2.15.1/package.tgz
+287 verbose tar unpacking to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander
+288 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander is being purged
+289 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander
+290 silly gunzTarPerm modes [ '755', '644' ]
+291 silly gunzTarPerm extractEntry package.json
+292 silly gunzTarPerm extractEntry CHANGELOG.md
+293 silly gunzTarPerm extractEntry index.js
+294 silly gunzTarPerm extractEntry LICENSE
+295 silly gunzTarPerm extractEntry Readme.md
+296 silly gunzTarPerm extractEntry typings/index.d.ts
+297 verbose write writing to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander/package.json
+298 info preinstall commander@2.15.1
+299 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander/package.json
+300 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander/package.json
+301 silly install resolved []
+302 verbose about to build /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander
+303 info build /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander
+304 info linkStuff commander@2.15.1
+305 silly linkStuff commander@2.15.1 has /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules as its parent node_modules
+306 verbose write writing to /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander/package.json
+307 verbose linkBins commander@2.15.1
+308 verbose linkMans commander@2.15.1
+309 verbose rebuildBundles commander@2.15.1
+310 info install commander@2.15.1
+311 info preinstall commander@2.15.1
+312 info postinstall commander@2.15.1
+313 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander/package.json
+314 verbose unlock done using /Users/fernandogelin/.npm/_locks/commander-47dc31f440c274ec.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify/node_modules/commander
+315 verbose about to build /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify
+316 info build /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify
+317 verbose readDependencies loading dependencies from /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander/package.json
+318 info linkStuff topojson-simplify@3.0.2
+319 silly linkStuff topojson-simplify@3.0.2 has /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules as its parent node_modules
+320 silly install resolved []
+321 verbose about to build /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander
+322 info build /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander
+323 info linkStuff commander@2.15.1
+324 silly linkStuff commander@2.15.1 has /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules as its parent node_modules
+325 verbose linkBins topojson-simplify@3.0.2
+326 verbose link bins [ { toposimplify: 'bin/toposimplify' },
+326 verbose link bins   '/Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/.bin',
+326 verbose link bins   false ]
+327 verbose linkMans topojson-simplify@3.0.2
+328 verbose rebuildBundles topojson-simplify@3.0.2
+329 verbose rebuildBundles [ 'commander' ]
+330 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/.bin/toposimplify is being purged
+331 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/.bin/toposimplify
+332 verbose linkBins commander@2.15.1
+333 verbose linkMans commander@2.15.1
+334 verbose rebuildBundles commander@2.15.1
+335 info install commander@2.15.1
+336 info install topojson-simplify@3.0.2
+337 info postinstall commander@2.15.1
+338 info postinstall topojson-simplify@3.0.2
+339 verbose unlock done using /Users/fernandogelin/.npm/_locks/commander-9446a97a3d5d964e.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server/node_modules/commander
+340 verbose about to build /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server
+341 info build /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server
+342 verbose unlock done using /Users/fernandogelin/.npm/_locks/topojson-simplify-6a184980f11cf0cf.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-simplify
+343 info linkStuff topojson-server@3.0.0
+344 silly linkStuff topojson-server@3.0.0 has /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules as its parent node_modules
+345 verbose linkBins topojson-server@3.0.0
+346 verbose link bins [ { geo2topo: 'bin/geo2topo' },
+346 verbose link bins   '/Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/.bin',
+346 verbose link bins   false ]
+347 verbose linkMans topojson-server@3.0.0
+348 verbose rebuildBundles topojson-server@3.0.0
+349 verbose rebuildBundles [ 'commander' ]
+350 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/.bin/geo2topo is being purged
+351 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/.bin/geo2topo
+352 info install topojson-server@3.0.0
+353 info postinstall topojson-server@3.0.0
+354 verbose unlock done using /Users/fernandogelin/.npm/_locks/topojson-server-58d3180281037bd0.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-server
+355 verbose about to build /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+356 info build /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+357 info linkStuff topojson@3.0.2
+358 silly linkStuff topojson@3.0.2 has /Users/fernandogelin/Documents/map-viz/node_modules as its parent node_modules
+359 verbose linkBins topojson@3.0.2
+360 verbose link bins [ { geo2topo: 'node_modules/topojson-server/bin/geo2topo',
+360 verbose link bins     toposimplify: 'node_modules/topojson-simplify/bin/toposimplify',
+360 verbose link bins     topo2geo: 'node_modules/topojson-client/bin/topo2geo',
+360 verbose link bins     topomerge: 'node_modules/topojson-client/bin/topomerge',
+360 verbose link bins     topoquantize: 'node_modules/topojson-client/bin/topoquantize' },
+360 verbose link bins   '/Users/fernandogelin/Documents/map-viz/node_modules/.bin',
+360 verbose link bins   false ]
+361 verbose linkMans topojson@3.0.2
+362 verbose rebuildBundles topojson@3.0.2
+363 verbose rebuildBundles [ '.bin', 'topojson-server', 'topojson-simplify' ]
+364 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/.bin/geo2topo is being purged
+365 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/.bin/geo2topo
+366 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/.bin/toposimplify is being purged
+367 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/.bin/toposimplify
+368 verbose unlock done using /Users/fernandogelin/.npm/_locks/topojson-6df8f05877a32102.lock for /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+369 verbose stack Error: ENOENT: no such file or directory, chmod '/Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-client/bin/topo2geo'
+369 verbose stack     at Error (native)
+370 verbose cwd /Users/fernandogelin/Documents/map-viz
+371 error Darwin 17.3.0
+372 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+373 error node v4.2.1
+374 error npm  v2.14.7
+375 error path /Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-client/bin/topo2geo
+376 error code ENOENT
+377 error errno -2
+378 error syscall chmod
+379 error enoent ENOENT: no such file or directory, chmod '/Users/fernandogelin/Documents/map-viz/node_modules/topojson/node_modules/topojson-client/bin/topo2geo'
+379 error enoent This is most likely not a problem with npm itself
+379 error enoent and is related to npm not being able to find a file.
+380 verbose exit [ -2, true ]
+381 verbose unbuild node_modules/topojson
+382 info preuninstall topojson@3.0.2
+383 info uninstall topojson@3.0.2
+384 verbose unbuild rmStuff topojson@3.0.2 from /Users/fernandogelin/Documents/map-viz/node_modules
+385 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/.bin/geo2topo is being gently removed
+386 silly gentlyRm verifying /Users/fernandogelin/Documents/map-viz is an npm working directory
+387 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/.bin/toposimplify is being gently removed
+388 silly gentlyRm verifying /Users/fernandogelin/Documents/map-viz is an npm working directory
+389 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topo2geo is being gently removed
+390 silly gentlyRm verifying /Users/fernandogelin/Documents/map-viz is an npm working directory
+391 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topomerge is being gently removed
+392 silly gentlyRm verifying /Users/fernandogelin/Documents/map-viz is an npm working directory
+393 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topoquantize is being gently removed
+394 silly gentlyRm verifying /Users/fernandogelin/Documents/map-viz is an npm working directory
+395 silly gentlyRm containing path /Users/fernandogelin/Documents/map-viz is under npm's control, in /Users/fernandogelin/Documents/map-viz
+396 silly gentlyRm deletion target /Users/fernandogelin/Documents/map-viz/node_modules/.bin/geo2topo is under /Users/fernandogelin/Documents/map-viz
+397 verbose gentlyRm vacuuming from /Users/fernandogelin/Documents/map-viz/node_modules/.bin/geo2topo up to /Users/fernandogelin/Documents/map-viz
+398 silly gentlyRm containing path /Users/fernandogelin/Documents/map-viz is under npm's control, in /Users/fernandogelin/Documents/map-viz
+399 silly gentlyRm deletion target /Users/fernandogelin/Documents/map-viz/node_modules/.bin/toposimplify is under /Users/fernandogelin/Documents/map-viz
+400 verbose gentlyRm vacuuming from /Users/fernandogelin/Documents/map-viz/node_modules/.bin/toposimplify up to /Users/fernandogelin/Documents/map-viz
+401 silly gentlyRm containing path /Users/fernandogelin/Documents/map-viz is under npm's control, in /Users/fernandogelin/Documents/map-viz
+402 silly gentlyRm deletion target /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topo2geo is under /Users/fernandogelin/Documents/map-viz
+403 verbose gentlyRm vacuuming from /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topo2geo up to /Users/fernandogelin/Documents/map-viz
+404 silly gentlyRm containing path /Users/fernandogelin/Documents/map-viz is under npm's control, in /Users/fernandogelin/Documents/map-viz
+405 silly gentlyRm deletion target /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topomerge is under /Users/fernandogelin/Documents/map-viz
+406 verbose gentlyRm vacuuming from /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topomerge up to /Users/fernandogelin/Documents/map-viz
+407 silly gentlyRm containing path /Users/fernandogelin/Documents/map-viz is under npm's control, in /Users/fernandogelin/Documents/map-viz
+408 silly gentlyRm deletion target /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topoquantize is under /Users/fernandogelin/Documents/map-viz
+409 verbose gentlyRm vacuuming from /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topoquantize up to /Users/fernandogelin/Documents/map-viz
+410 silly vacuum-fs removing /Users/fernandogelin/Documents/map-viz/node_modules/.bin/geo2topo
+411 silly vacuum-fs removing /Users/fernandogelin/Documents/map-viz/node_modules/.bin/toposimplify
+412 silly vacuum-fs removing /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topo2geo
+413 silly vacuum-fs removing /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topomerge
+414 silly vacuum-fs removing /Users/fernandogelin/Documents/map-viz/node_modules/.bin/topoquantize
+415 silly vacuum-fs quitting because other entries in /Users/fernandogelin/Documents/map-viz/node_modules/.bin
+416 silly vacuum-fs quitting because other entries in /Users/fernandogelin/Documents/map-viz/node_modules/.bin
+417 silly vacuum-fs quitting because other entries in /Users/fernandogelin/Documents/map-viz/node_modules/.bin
+418 silly vacuum-fs quitting because other entries in /Users/fernandogelin/Documents/map-viz/node_modules/.bin
+419 silly vacuum-fs quitting because other entries in /Users/fernandogelin/Documents/map-viz/node_modules/.bin
+420 info postuninstall topojson@3.0.2
+421 silly gentlyRm /Users/fernandogelin/Documents/map-viz/node_modules/topojson is being purged from base /Users/fernandogelin/Documents/map-viz
+422 verbose gentlyRm don't care about contents; nuking /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+423 silly vacuum-fs purging /Users/fernandogelin/Documents/map-viz/node_modules/topojson
+424 silly vacuum-fs quitting because other entries in /Users/fernandogelin/Documents/map-viz/node_modules

@@ -90,7 +90,7 @@ function updateData(dropdownId, divId) {
       .call(updateFill, selected_dataset);
     updateAxis(selected_dataset, divId);
 
-    d3.select(".data-description." + position).select('text').remove();
+    d3.select(".data-description." + position).selectAll('text').remove();
     displayDataDescription(dropdownId);
 
     var xVar = d3.select(".dropdown.left").property("value");
