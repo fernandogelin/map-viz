@@ -57,13 +57,6 @@ var dropdown_options = [
   value: 'GOVT',
   description: 'Using North American Industry Classification (NAICS) codes from the Department of Labor and Training data, anonymized data on firms were separated into industries based on categorizations put together by the Bureau of Labor Statistics.'
   },
-  {text: 'Proportion of teachers that add value (math)',
-  value: 'va_math',
-  description: "The fraction of anonymized elementary and middle school teachers accessible by students in a given census block that had a positive impact on test scores. A teacher's value-added is defined as the average test-score gain for her students, adjusted for differences across classrooms in students’ characteristics (including previous test scores). The estimates were constructed using Empirical Bayes shrinkage methods described in Kane and Staiger (2008). Model data included anonymized NECAP and PARCC standardized test scores from academic years 2011-2012 through 2014-2015."
-  },
-  {text: 'Proportion of teachers that add value (reading)',
-  value: 'va_read',
-  description: "The fraction of anonymized elementary and middle school teachers accessible by students in a given census block that had a positive impact on test scores. A teacher's value-added is defined as the average test-score gain for her students, adjusted for differences across classrooms in students’ characteristics (including previous test scores). The estimates were constructed using Empirical Bayes shrinkage methods described in Kane and Staiger (2008). Model data included anonymized NECAP and PARCC standardized test scores from academic years 2011-2012 through 2014-2015."},
   {text: 'Proportion ever incarcerated',
   value: 'PROPORTION_PRISONERS',
   description: 'The proportion of people who have ever been incarcerated was constructed using the most recent block group of residence from anonymized records of individuals who have ever been incarcerated. This number is presented as a proportion of the population over the age of 18. Note: there is a block group which may be disproportionately listed as a residential area for prior convicts due to the location of homeless shelters in the area.'
@@ -99,7 +92,7 @@ function displayDataDescription(dropdownId) {
     .attr('dy', '1.2em')
     .attr('transform', 'translate(40,0)')
     .text(description[0].description)
-    
+
   textDescription.append('tspan')
     .attr('x', '0')
     .attr('dy', '1.2em')
