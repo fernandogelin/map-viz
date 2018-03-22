@@ -1,5 +1,5 @@
 // Race plot
-var rWidth = 300,
+var rWidth = 200,
     rHeight = 200;
 
 var raceBar = d3.select('.race-plot')
@@ -60,10 +60,11 @@ function plotRaceRI() {
     raceAll.selectAll("text").data(data).enter()
       .append("text")
       .attr("class", "race-lable")
-      .attr("x", 30)
+      .attr("x", 10)
       .attr("y", function(d, i) { return i*25; })
       .text(function (d) { return d.race; })
       .attr("text-anchor", "end")
+      .attr("font-size", '0.4rem')
 
     d3.selectAll(".race-lable")
       .attr("transform", "translate(190,12)")
